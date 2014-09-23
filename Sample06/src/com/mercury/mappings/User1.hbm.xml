@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>     
+    <class name="com.mercury.beans.User1" table="User1">         
+        <id name="userid" column="Userid">
+        	<generator class="increment"/>
+        </id> 
+        <property name="username" column="Username"/>
+        <property name="password" column="Password"/>
+        <property name="email" column="Email"/>
+        <property name="firstname" column="firstname"/>
+        <property name="lastname" column="Lastname"/>
+        <property name="authority" column="Authority"/>
+        <property name="enabled" column="Enabled"/>
+    </class>
+</hibernate-mapping>
