@@ -13,5 +13,8 @@
 <body>
 <div>This is an empty page, suppose to output data</div>
 <a href="<c:url value='/j_spring_security_logout'/>">Logout</a>
+<div>
+Deactivate your account? <a href="deactivate.html" class="btn btn-black">Deactivate</a>
+</div>
 </body>
 </html>

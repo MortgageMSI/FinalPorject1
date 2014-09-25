@@ -71,4 +71,34 @@ public class HelloController {
 		return "registererrorpage";
 	}
 	
+	@RequestMapping(value="/deactivate", method = RequestMethod.GET)
+	public ModelAndView deactivate() {	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("deactivate");
+		return mav;
+	}
+	
+	@RequestMapping(value="/deactivate", method=RequestMethod.POST)
+	public ModelAndView deactivate(ModelMap model,
+			HttpServletRequest request) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		String username = request.getParameter("j_username");
+		String password = request.getParameter("j_password");
+		User1 user = new User1();
+		user.setUsername(username);
+		user.setPassword(password);
+		System.out.println(user.getUsername());
+		if(hs.deactivate(user))
+		{	
+			//System.out.println("2");
+			//javaMail jm = new javaMail(user.getFirstname(),user.getLastname(),user.getEmail(),user.getUsername());
+			//jm.sendWelcomeEmail();
+			mav.setViewName("login");
+		}
+		else{
+			//System.out.println("3");
+			mav.setViewName("registererrorpage");
+		}
+		return mav;
+	}
 }

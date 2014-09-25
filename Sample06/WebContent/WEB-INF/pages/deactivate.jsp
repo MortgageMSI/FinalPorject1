@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login Page</title>
+<title>Deactivate Page</title>
 <link rel="stylesheet" type="text/css" href="css/main.css"/>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 </script>
@@ -14,7 +14,7 @@
 		if ("<c:out value='${param.login_error}'/>" != "") {
 		  	$('#wrongCredentials').show();
 		}
-		$("#signin").on("click", loginValidation);	
+		$("#deactivate").on("click", loginValidation);	
 	});
 
 	function loginValidation() {
@@ -38,7 +38,7 @@
 </script>
 </head>
 <body>
-<h1><font color="blue">Login with Username and Password</font></h1>
+<h1><font color="blue">Deactivate your account</font></h1>
 <!-- Alerts for missing form info  --> 
 <div class="alert" style="display:none;" id="usernameAndPasswordReq">
 	<p>Username and password are required</p>
@@ -54,7 +54,7 @@
 	<p>The username or password supplied is incorrect</p>
 </div>	
 <!-- Login Form -->	
-<form name="f" action="<c:url value='j_spring_security_check'/>" method="POST" id="login-form">
+<form action="deactivate.html" method="POST" id="login-form">
 	<table>
 		<tr>
 			<td>Username: </td>
@@ -68,16 +68,13 @@
 			<td></td>
 			<td>
 				<button type="reset">Clear</button>
-				<button id="signin" type="submit">Sign In</button>
+				<button id="deactivate" type="submit">deactivate</button>
 			</td>
 		</tr>
 	</table>		
 </form>
     <div>
-      Don't have an account? <a href="signup.html" class="btn btn-black">Sign up</a>
-    </div>
-    <div>
-      Reactivate your account? <a href="main.html" class="btn btn-black">Reactivate</a>
+      Change your mind? <a href="main.html" class="btn btn-black">Go back</a>
     </div>
 </body>
 </html>
