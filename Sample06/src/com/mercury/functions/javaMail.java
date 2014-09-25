@@ -8,7 +8,7 @@ import javax.mail.internet.*;
 
 public class javaMail {
 	private final static String host_user = "zhaner08@gmail.com";
-	private final static String host_password = "Love1314";
+	private final static String host_password = "";
 	private final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 	private final static Properties prop;
 	private final static Session session;
