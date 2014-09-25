@@ -3,6 +3,8 @@ package com.mercury.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import com.mercury.beans.User;
@@ -17,9 +19,38 @@ public class HelloDaoImpl implements HelloDao {
 	}
 	
 	@Override
+	public Boolean nameIsExist(String str){
+		if ((template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("username", str))).size()!=0)){
+				return true;
+			}
+			else 
+				return false;
+		}
+	
+	@Override
+	public Boolean emailIsExist(String str){
+		if ((template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("email", str))).size()!=0)){
+				return true;
+			}
+			else 
+				return false;
+		}
+
+
+	
+	@Override
 	public User1 findByName(String name) {
 		// TODO Auto-generated method stub
 		return (User1)template.load(User1.class, name);
+	}
+	
+	
+	@Override
+	public User1 findByUsername(String username) {
+		// TODO Auto-generated method stub
+		User1 u = null;
+			u = (User1)template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("username", username))).get(0);
+		return u;
 	}
 
 	@Override

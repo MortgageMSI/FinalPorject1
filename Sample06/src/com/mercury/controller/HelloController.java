@@ -1,16 +1,20 @@
 package com.mercury.controller;
 
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mercury.beans.User;
 import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
+import com.mercury.functions.javaMail;
 import com.mercury.service.HelloService;
 
 @Controller
@@ -32,14 +36,39 @@ public class HelloController {
 		this.viewPage = viewPage;
 	}
 	
-	@RequestMapping(value="/hello", method=RequestMethod.POST)
-	public ModelAndView process(@ModelAttribute("user1") 
-			User1 user, BindingResult resulttest) {
-		UserInfo userInfo = hs.process(user);
+	@RequestMapping(value="/signup", method = RequestMethod.GET)
+	public ModelAndView mainPage() {	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewPage);
-		mav.addObject("userInfo", userInfo);
+		mav.setViewName("signup");
+		mav.addObject("title", "Sign Up, it's free and always will be");
+
 		return mav;
+	}
+	
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
+	public ModelAndView process(ModelMap model, User1 user,
+			HttpServletRequest request) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		//System.out.println(user.getUsername());
+		if(hs.register(user))
+		{	
+			//System.out.println("2");
+			UserInfo userInfo = hs.process(user);
+			javaMail jm = new javaMail(user.getFirstname(),user.getLastname(),user.getEmail(),user.getUsername());
+			jm.sendWelcomeEmail();
+			mav.setViewName(viewPage);
+			mav.addObject("userInfo", userInfo);
+		}
+		else{
+			//System.out.println("3");
+			mav.setViewName("registererrorpage");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/registererrorpage")
+	public String error() {
+		return "registererrorpage";
 	}
 	
 }

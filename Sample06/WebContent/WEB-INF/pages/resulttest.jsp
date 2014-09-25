@@ -9,19 +9,32 @@
 </head>
 <body>
 <h1><font color="green">${userInfo.message}</font></h1>
+<h1><font color="green">Below is your information</font></h1>
 <table width="200" border="1">
 	<tr>
-		<th>Name</th>
+		<th>UserName</th>
+		<th>password</th>
+		<th>email</th>
 		<th>firstname</th>
 		<th>lastname</th>
+		<th>authority</th>
+		<th>enabled</th>
 	</tr>
-	<c:forEach var="user" items="${userInfo.users}">
+	<c:set var="user" value="${userInfo.user}"/>
 		<tr>
 			<td>${user.username}</td>
+			<td>${user.password}</td>
+			<td>${user.email}</td>
 			<td>${user.firstname}</td>
 			<td>${user.lastname}</td>
+			<td>${user.authority}</td>
+			<td>${user.enabled}</td>
 		</tr>
-	</c:forEach>
 </table>
+
+    <div>
+      Go back and sign in <a href="main.html" class="btn btn-black">Sign in</a>
+    </div>
+    
 </body>
 </html>

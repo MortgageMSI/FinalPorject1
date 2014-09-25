@@ -73,5 +73,8 @@
 		</tr>
 	</table>		
 </form>
+    <div>
+      Don't have an account? <a href="signup.html" class="btn btn-black">Sign up</a>
+    </div>
 </body>
 </html>

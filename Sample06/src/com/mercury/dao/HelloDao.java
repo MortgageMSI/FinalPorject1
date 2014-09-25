@@ -11,4 +11,7 @@ public interface HelloDao {
 	public void update(User1 user);
 	public void delete(User1 user);
 	public List<User1> queryAll();
+	public User1 findByUsername(String username);
+	public Boolean nameIsExist(String str);
+	public Boolean emailIsExist(String str);
 }

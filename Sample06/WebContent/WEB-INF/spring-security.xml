@@ -15,7 +15,7 @@
         	default-target-url="/main.html"
         	authentication-failure-url="/login.html?login_error=1" 
         />
-        <sec:logout logout-success-url="/login.html"  delete-cookies="JSESSIONID"/>
+        <sec:logout logout-success-url="/main.html"  delete-cookies="JSESSIONID"/>
 	</sec:http>
  	
 	<sec:authentication-manager alias="authenticationManager">

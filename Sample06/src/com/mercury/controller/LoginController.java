@@ -17,8 +17,8 @@ public class LoginController {
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public ModelAndView mainPage() {	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("hello");
-		mav.addObject("title", "Sign Up, it's free and always will be");
+		mav.setViewName("inside");
 		return mav;
+		
 	}
 }
