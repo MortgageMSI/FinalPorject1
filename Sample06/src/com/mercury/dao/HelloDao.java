@@ -2,7 +2,7 @@ package com.mercury.dao;
 
 import java.util.List;
 
-import com.mercury.beans.User;
+
 import com.mercury.beans.User1;
 
 public interface HelloDao {
@@ -14,5 +14,6 @@ public interface HelloDao {
 	public User1 findByUsername(String username);
 	public Boolean nameIsExist(String str);
 	public Boolean emailIsExist(String str);
+	public Boolean findByUsernamepasswordemail(String username, String password,String email);
 	public Boolean findByUsernamepassword(String username, String password);
 }

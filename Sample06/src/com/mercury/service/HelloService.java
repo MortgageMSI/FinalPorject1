@@ -48,6 +48,24 @@ public class HelloService implements UserDetailsService {
 		}
 	}
 	
+	public boolean reactivate(User1 user) throws NoSuchAlgorithmException{
+		String md5 = md5Converter.convert(user.getPassword());
+		user.setPassword(md5);
+		if(!hd.findByUsernamepasswordemail(user.getUsername(), user.getPassword(),user.getEmail()))
+		{
+			//System.out.print("exist");
+			return false;
+		}
+		else{
+			//System.out.print(user.getUsername());
+			User1 u = hd.findByUsername(user.getUsername());
+			u.setEnabled(1);
+			hd.update(u);
+			//System.out.println("changed");
+			return true;
+		}
+	}
+	
 	public boolean register(User1 user) throws NoSuchAlgorithmException{
 		if(hd.nameIsExist(user.getUsername()) || hd.emailIsExist(user.getEmail()))
 		{

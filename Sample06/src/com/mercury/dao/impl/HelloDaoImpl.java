@@ -79,6 +79,15 @@ public class HelloDaoImpl implements HelloDao {
 		}
 		return false;
 	}
+	
+	@Override
+	public Boolean findByUsernamepasswordemail(String username, String password,String email) {
+		// TODO Auto-generated method stub
+		if ((template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("username", username)).add(Restrictions.eq("password", password)).add(Restrictions.eq("username", username)).add(Restrictions.eq("email", email))).size()!=0)){
+			return true;
+		}
+		return false;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
