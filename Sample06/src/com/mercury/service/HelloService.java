@@ -78,6 +78,18 @@ public class HelloService implements UserDetailsService {
 		}
 	}
 	
+	public boolean hasUserpassword(User1 user) throws NoSuchAlgorithmException{
+		if(!hd.findByUsernamepasswordemail(user.getUsername(), user.getPassword(),user.getEmail()))
+		{
+			//System.out.print("exist");
+			return false;
+		}
+		else{
+
+			return true;
+		}
+	}
+	
 	public boolean register(User1 user) throws NoSuchAlgorithmException{
 		if(hd.nameIsExist(user.getUsername()) || hd.emailIsExist(user.getEmail()))
 		{

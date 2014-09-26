@@ -217,5 +217,44 @@ public class HelloController {
 		}
 		return mav;
 	}
+	
+	//change new password
+	@RequestMapping(value="/cpassword", method = RequestMethod.GET)
+	public ModelAndView cpassword() {	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("cpassword");
+		return mav;
+	}
+	
+	@RequestMapping(value="/cpassword", method=RequestMethod.POST)
+	public ModelAndView cpassword(ModelMap model,
+			HttpServletRequest request) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		String email = request.getParameter("j_email");
+		String username = request.getParameter("j_name");
+		String password = request.getParameter("j_opassword");
+		String npassword = request.getParameter("j_npassword");
+		User1 user = new User1();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setPassword(md5Converter.convert(password));
+		//System.out.println(username);
+		//System.out.println(password);
+		if(hs.hasUserpassword(user))
+		{	
+			User1 u = hs.findUserByEmail(email);
+			String md5 = md5Converter.convert(npassword);
+			u.setPassword(md5);
+			hs.update(u);
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "New password set");
+		}
+		else{
+			//System.out.println("3");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "We cannot find a match in our database");
+		}
+		return mav;
+	}
 
 }

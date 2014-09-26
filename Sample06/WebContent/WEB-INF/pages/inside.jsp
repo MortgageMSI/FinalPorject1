@@ -16,5 +16,8 @@
 <div>
 Deactivate your account? <a href="deactivate.html" class="btn btn-black">Deactivate</a>
 </div>
+<div>
+<a href="cpassword.html" class="btn btn-black">Change Password</a>
+</div>
 </body>
 </html>
