@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
 import com.mercury.functions.javaMail;
+import com.mercury.functions.md5Converter;
+import com.mercury.functions.randomGenerator;
 import com.mercury.service.HelloService;
 
 @Controller
@@ -61,7 +63,8 @@ public class HelloController {
 		}
 		else{
 			//System.out.println("3");
-			mav.setViewName("registererrorpage");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Register failed, user name or email might already exist");
 		}
 		return mav;
 	}
@@ -97,7 +100,8 @@ public class HelloController {
 		}
 		else{
 			//System.out.println("3");
-			mav.setViewName("registererrorpage");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Deactivate failed, user name or email might be wrong");
 		}
 		return mav;
 	}
@@ -130,7 +134,8 @@ public class HelloController {
 		}
 		else{
 			//System.out.println("3");
-			mav.setViewName("registererrorpage");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Welcome back!");
 		}
 		return mav;
 	}
@@ -167,6 +172,48 @@ public class HelloController {
 			//System.out.println("3");
 			mav.setViewName("systemmessage");
 			mav.addObject("title", "Your email address is wrong");
+		}
+		return mav;
+	}
+	
+	//forget password, send new password
+	@RequestMapping(value="/forgetpassword", method = RequestMethod.GET)
+	public ModelAndView forgetpassword() {	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("forgetpassword");
+		return mav;
+	}
+	
+	@RequestMapping(value="/forgetpassword", method=RequestMethod.POST)
+	public ModelAndView forgetpassword(ModelMap model,
+			HttpServletRequest request) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		String email = request.getParameter("j_email");
+		String username = request.getParameter("j_username");
+		String firstname = request.getParameter("j_firstname");
+		String lastname = request.getParameter("j_lastname");
+		User1 user = new User1();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		//System.out.println(email);
+		if(hs.hasUser(user))
+		{	
+			User1 u = hs.findUserByEmail(email);
+			String passcode = randomGenerator.randomString(8);
+			String md5 = md5Converter.convert(passcode);
+			u.setPassword(md5);
+			hs.update(u);
+			javaMail jm = new javaMail(u.getFirstname(),u.getLastname(),u.getEmail(),u.getUsername());
+			jm.sendPasswordEmail(passcode);
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Your new temp password  has been sent to your email");
+		}
+		else{
+			//System.out.println("3");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "We cannot find a match in our database");
 		}
 		return mav;
 	}

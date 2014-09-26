@@ -96,7 +96,16 @@ public class HelloDaoImpl implements HelloDao {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public Boolean findByAll(String username, String firstname, String lastname, String email) {
+		// TODO Auto-generated method stub
+		System.out.println(username);
+		if ((template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("lastname", lastname)).add(Restrictions.eq("firstname", firstname)).add(Restrictions.eq("username", username)).add(Restrictions.eq("email", email))).size()!=0)){
+			return true;
+		}
+		return false;
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User1> queryAll() {

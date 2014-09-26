@@ -14,26 +14,17 @@
 		$("#loginForm").on("submit", validateForm);
 	});
 	function validateForm() {
-		$("#nameAndAgeReq").hide();
 		$("#usernameReq").hide();
-		$("#passwordReq").hide();
 		$("#emailReq").hide();
 		$("#firstnameReq").hide();
 		$("#lastnameReq").hide();		
 		$("#ageIllegal").hide();
 		var userid = $("#j_name").val();
-		var password = $("#j_age").val();
 		var email= $("#j_email").val();
 		var firstname= $("#j_firstname").val();
 		var lastname= $("#j_lastname").val();
-		if (userid.length==0 && password.length==0&& lastname.length==0&& firstname.length==0 &&email.length==0) {
-			$("#nameAndAgeReq").show();
-			return false;
-		} else if (username.length==0) {
+		 if (username.length==0) {
 			$("#nameReq").show();
-			return false;
-		} else if (password.length==0) {
-			$("#passwordReq").show();
 			return false;
 		} else if (firstname.length==0) {
 			$("#firstnameReq").show();
@@ -50,16 +41,13 @@
 </script>
 </head>
 <body>
-<h2><font color="green">${title}</font></h2>
+<h2><font color="green">Fill in the form below to get a temporary password</font></h2>
 <!-- Alerts for missing form info  --> 
 <div class="alert" style="display: none;" id="nameAndAgeReq">
 	<p>field(fields) are required</p>
 </div>
 <div class="alert" style="display:none;" id="usernameReq">
 	<p>UserName is required</p>
-</div>
-<div class="alert" style="display:none;" id="passwordReq">
-	<p>Password is required</p>
 </div>
 <div class="alert" style="display:none;" id="emailReq">
 	<p>Email is required</p>
@@ -75,27 +63,23 @@
 	<p>Age is NOT an integer</p>
 </div>
 <!-- Form -->
-<form action="signup.html" method="post" id="loginForm">
+<form action="forgetpassword.html" method="post" id="loginForm">
 	<table>
 		<tr>
 			<td>UserName: </td>
-			<td><input type="text" name="username" id="j_name"/></td>
-		</tr>
-		<tr>
-			<td>Password: </td>
-			<td><input type="password" name="password" id="j_age"/></td>
+			<td><input type="text" name="j_username" id="j_name"/></td>
 		</tr>
 				<tr>
 			<td>Email: </td>
-			<td><input type="text" name="email" id="j_email"/></td>
+			<td><input type="text" name="j_email" id="j_email"/></td>
 		</tr>
 				<tr>
 			<td>FirstName: </td>
-			<td><input type="text" name="firstname" id="j_firstname"/></td>
+			<td><input type="text" name="j_firstname" id="j_firstname"/></td>
 		</tr>
 				<tr>
 			<td>LastName: </td>
-			<td><input type="text" name="lastname" id="j_lastname"/></td>
+			<td><input type="text" name="j_lastname" id="j_lastname"/></td>
 		</tr>
 
 
@@ -109,7 +93,7 @@
 	</table>
 </form>
     <div>
-      Already has an account? <a href="main.html" class="btn btn-black">Sign in</a>
+      <a href="login.html" class="btn btn-black">Go Back</a>
     </div>
 
 </body>

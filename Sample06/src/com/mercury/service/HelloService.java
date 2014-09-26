@@ -66,6 +66,18 @@ public class HelloService implements UserDetailsService {
 		}
 	}
 	
+	public boolean hasUser(User1 user) throws NoSuchAlgorithmException{
+		if(!hd.findByAll(user.getUsername(), user.getFirstname(),user.getLastname(),user.getEmail()))
+		{
+			//System.out.print("exist");
+			return false;
+		}
+		else{
+
+			return true;
+		}
+	}
+	
 	public boolean register(User1 user) throws NoSuchAlgorithmException{
 		if(hd.nameIsExist(user.getUsername()) || hd.emailIsExist(user.getEmail()))
 		{
@@ -79,6 +91,9 @@ public class HelloService implements UserDetailsService {
 			hd.save(user);
 			return true;
 		}
+	}
+	public void update(User1 user) throws NoSuchAlgorithmException{
+			hd.update(user);
 	}
 	
 	public boolean sendUsername(User1 user) {

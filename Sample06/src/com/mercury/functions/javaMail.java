@@ -94,9 +94,9 @@ public class javaMail {
 		sendEmail();
 	}
 	
-	public void sendPasswordEmail(){
-		//subject = "Your current password for Mortgage calculator.";
-		//content = "Your current password: "+user_password+"\nPlease login and change it ASAP.";
+	public void sendPasswordEmail(String password){
+		subject = "Your new password from MSI Mortgage Calculator";
+		content = "Your temperoray password: "+password;
 		sendEmail();
 	}
 	

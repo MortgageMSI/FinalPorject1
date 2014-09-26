@@ -82,5 +82,9 @@
         <div>
       Forget username? <a href="rusername.html" class="btn btn-black">retrive username</a>
     </div>
+    
+    <div>
+       <a href="forgetpassword.html" class="btn btn-black">Forget password?</a>
+    </div>
 </body>
 </html>
