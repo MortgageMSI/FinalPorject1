@@ -52,6 +52,14 @@ public class HelloDaoImpl implements HelloDao {
 			u = (User1)template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("username", username))).get(0);
 		return u;
 	}
+	
+	@Override
+	public User1 findUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		User1 u = null;
+			u = (User1)template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("email", email))).get(0);
+		return u;
+	}
 
 	@Override
 	public void save(User1 user) {

@@ -134,5 +134,41 @@ public class HelloController {
 		}
 		return mav;
 	}
+	
+	
+	
+	
+	//send username if forget
+	@RequestMapping(value="/rusername", method = RequestMethod.GET)
+	public ModelAndView rusername() {	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("rusername");
+		return mav;
+	}
+	
+	@RequestMapping(value="/rusername", method=RequestMethod.POST)
+	public ModelAndView rusername(ModelMap model,
+			HttpServletRequest request) throws NoSuchAlgorithmException {
+		ModelAndView mav = new ModelAndView();
+		String email = request.getParameter("j_email");
+		
+		User1 user = new User1();
+		user.setEmail(email);
+		System.out.println(email);
+		if(hs.sendUsername(user))
+		{	
+			User1 u = hs.findUserByEmail(email);
+			javaMail jm = new javaMail(u.getFirstname(),u.getLastname(),u.getEmail(),u.getUsername());
+			jm.sendUsernameEmail();
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Your username has been sent to your email");
+		}
+		else{
+			//System.out.println("3");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Your email address is wrong");
+		}
+		return mav;
+	}
 
 }

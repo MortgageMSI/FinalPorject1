@@ -81,6 +81,20 @@ public class HelloService implements UserDetailsService {
 		}
 	}
 	
+	public boolean sendUsername(User1 user) {
+		if(hd.emailIsExist(user.getEmail())){
+			return true;
+		}
+		else
+		{
+		return false;
+		}
+	}
+	
+	public User1 findUserByEmail(String email) {
+		return hd.findUserByEmail(email);
+	}
+	
 	public UserInfo process(User1 user) {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setMessage("Hello " + user.getUsername() + ", you are officially a member!");

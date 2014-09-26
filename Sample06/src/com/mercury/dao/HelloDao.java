@@ -16,4 +16,5 @@ public interface HelloDao {
 	public Boolean emailIsExist(String str);
 	public Boolean findByUsernamepasswordemail(String username, String password,String email);
 	public Boolean findByUsernamepassword(String username, String password);
+	public User1 findUserByEmail(String email);
 }

@@ -84,13 +84,13 @@ public class javaMail {
 	}
 	public void sendWelcomeEmail(){
 		subject = "Thank you for choosing MSI Mortgage Calculator";
-		content = firstname+ lastname+", welcome to MSI Mortgage Calculator!\n Please remember your username :" + username;
+		content = firstname+" "+ lastname+", welcome to MSI Mortgage Calculator!\n Please remember your username :" + username;
 		sendEmail();
 	}
 
 	public void sendUsernameEmail(){
-		subject = "Your username retrieval.";
-		content = "Your username: "+username;
+		subject = "Username retrieval from MSI Mortgage Calculator";
+		content = firstname+" "+ lastname+", Your username :" + username;
 		sendEmail();
 	}
 	
