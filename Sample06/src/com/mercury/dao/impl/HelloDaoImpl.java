@@ -7,7 +7,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import com.mercury.beans.User;
+import com.mercury.beans.Rate;
 import com.mercury.beans.User1;
 import com.mercury.dao.HelloDao;
 
@@ -113,5 +113,15 @@ public class HelloDaoImpl implements HelloDao {
 		String hql = "from User1";
 		return template.find(hql);
 	}
+	
+	
+	
+	
+	@Override
+	public Rate getRate(int rid) {
+		// TODO Auto-generated method stub
+		return template.load(Rate.class, rid);
+	}
+
 
 }

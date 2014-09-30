@@ -9,14 +9,19 @@ import org.springframework.ui.ModelMap;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mercury.beans.Rate;
 import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
+import com.mercury.functions.ComplexReturnType;
+import com.mercury.functions.MortgageCalculator;
 import com.mercury.functions.javaMail;
 import com.mercury.functions.md5Converter;
 import com.mercury.functions.randomGenerator;
+import com.mercury.functions.toJson;
 import com.mercury.service.HelloService;
 
 @Controller
@@ -24,6 +29,7 @@ import com.mercury.service.HelloService;
 public class HelloController {
 	private HelloService hs;
 	private String viewPage;
+	private MortgageCalculator mc;
 	
 	public HelloService getHs() {
 		return hs;
@@ -36,6 +42,14 @@ public class HelloController {
 	}
 	public void setViewPage(String viewPage) {
 		this.viewPage = viewPage;
+	}
+	
+	public MortgageCalculator getMc() {
+		return mc;
+	}
+
+	public void setMc(MortgageCalculator mc) {
+		this.mc = mc;
 	}
 	
 //	@RequestMapping(value="/signup", method = RequestMethod.GET)
@@ -271,6 +285,49 @@ public class HelloController {
 			mav.addObject("title", "We cannot find a match in our database");
 		}
 		return mav;
+	}
+	
+	
+	
+	@RequestMapping(value="/calculate", method=RequestMethod.POST)
+	@ResponseBody
+	public String getInput(HttpServletRequest request){
+		int loan_amount = Integer.parseInt(request.getParameter("loan_amount"));
+		double down_payment = Double.parseDouble(request.getParameter("down_payment"));
+		int loan_term = Integer.parseInt(request.getParameter("loanTerm"));
+		String loan_type = request.getParameter("loanType");
+		if(loan_type==null)
+			loan_type="Fixed";
+		double expected_adjustment = 0;
+			   expected_adjustment = Double.parseDouble(request.getParameter("expected_adjustment"));
+	    double rate_gap = 0;
+	    	   rate_gap = Double.parseDouble(request.getParameter("rate_gap"));
+		ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
+		return toJson.convert(mb);
+	}
+	
+	private ComplexReturnType parseAndCalculate(int loan_amount, double down_payment, int loan_term, 
+											String loan_type, double expected_adjustment, double rate_gap){
+		
+		int principle = (int)(loan_amount * (1-down_payment));
+		//loan_term;
+		int num_of_arms = loan_term;
+		if(!loan_type.equals("Fixed"))
+			num_of_arms = Integer.parseInt(loan_type.substring(0, 1));
+		
+		Rate rate = hs.getRate(loan_term/10);
+		double start_rate = rate.getRate()/100;
+		
+//		System.out.println("INPUT PARAMETERS:");
+//		System.out.println("start_rate:"+start_rate);
+//		System.out.println("principle:"+principle);
+//		System.out.println("loan_term:"+loan_term);
+//		System.out.println("num_of_arms:"+num_of_arms);
+//		System.out.println("expected_adjustment:"+expected_adjustment);
+//		System.out.println("rate_gap:"+rate_gap);
+		
+		ComplexReturnType mb = mc.getPayment(start_rate, principle, loan_term, num_of_arms, expected_adjustment/100, rate_gap/100);
+		return mb;
 	}
 
 }

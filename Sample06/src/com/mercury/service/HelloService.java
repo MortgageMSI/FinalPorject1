@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mercury.beans.Rate;
 import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
 import com.mercury.dao.HelloDao;
@@ -130,6 +131,10 @@ public class HelloService implements UserDetailsService {
 		userInfo.setMessage("Hello " + user.getUsername() + ", you are officially a member!");
 		userInfo.setUser(hd.findByUsername(user.getUsername()));
 		return userInfo;
+	}
+	
+	public Rate getRate(int rid){
+		return hd.getRate(rid);
 	}
 	
 

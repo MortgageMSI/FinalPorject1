@@ -21,6 +21,7 @@
     <bean id="helloController" class="com.mercury.controller.HelloController">
     	<property name="hs" ref="helloService"/>
     	<property name="viewPage" value="resulttest"/>
+    	<property name="mc" ref="mc"/>
     </bean>
     <bean id="loginController" class="com.mercury.controller.LoginController"/>
     <bean id="helloService" class="com.mercury.service.HelloService">
@@ -29,12 +30,18 @@
     <bean id="helloDao" class="com.mercury.dao.impl.HelloDaoImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+        <bean id="mc" class="com.mercury.functions.MortgageCalculator">
+    </bean>
+    
+    
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
 		<property name="dataSource" ref="dataSource"/>
 		<property name="mappingResources">
 			<list>
 				<value>com/mercury/mappings/User.hbm.xml</value>
 				<value>com/mercury/mappings/User1.hbm.xml</value>
+				<value>com/mercury/mappings/Rate.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

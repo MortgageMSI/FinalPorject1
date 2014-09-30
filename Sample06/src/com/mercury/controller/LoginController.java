@@ -1,5 +1,7 @@
 package com.mercury.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +17,22 @@ public class LoginController {
 		return "login";
 	}
 	
+//	@RequestMapping(value="/main")
+//	public ModelAndView mainPage() {	
+//		ModelAndView mav = new ModelAndView();
+//		System.out.println("1");
+//		mav.setViewName("inside");
+//		mav.addObject("info", "data");
+//		return mav;
+//		
+//	}
+	
 	@RequestMapping(value="/main")
-	public ModelAndView mainPage() {	
-		ModelAndView mav = new ModelAndView();
-		System.out.println("1");
-		mav.setViewName("inside");
-		mav.addObject("info", "data");
-		return mav;
-		
+	public String mainPage(ModelMap map) {	
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = user.getUsername();
+		map.addAttribute("username", username);
+		map.addAttribute("message", "Welcome to M.C by Jason");
+		return "index";
 	}
 }

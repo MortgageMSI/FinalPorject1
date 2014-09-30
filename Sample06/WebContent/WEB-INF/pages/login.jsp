@@ -33,7 +33,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<form class="navbar-form navbar-right" name="f" action="<c:url value='j_spring_security_check'/>" method="POST" id="login-form">
-					<div class="form-group" >
+					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Username" name="j_username" id="j_username">
 						<input type="password" class="form-control" placeholder="Password" name="j_password" id="j_password">
 					</div>
@@ -55,7 +55,7 @@
 							<li><a href="#" data-toggle="modal" data-target="#myModal2">Forgot Password?</a></li>
 							<li><a href="#" data-toggle="modal" data-target="#myModal3">Reactivate Account</a></li>
 							<li class="divider"></li>
-							<li><a href="#" data-toggle="modal" data-target="#myModal4">Sign up</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#myModal4">Register</a></li>
 						</ul>
 				</form>
 			</div>
@@ -76,62 +76,7 @@
 		 -->
 	</div>
 	
-	<div class="container">
-        <div class="row">
-        	<div class="span6">
-        		<div class="register-info-wraper">
-        			<div id="register-info">
-        				<h1>You are about 30 seconds away from using this awesome Mortgage Calculator. Good choice!</h1>
-        				<ul dir="rtl">
-        					<li>User Friendly, E-Z to Use, Clean UI</li>
-        					<li>That's why this app is so awesome</li>
-        					<li>!So register, like, right NOW</li>
-        					<li>Or don't, who cares, LOL</li>
-        					<li>Anyway, you have to register before use...</li>
-        				</ul>
-        			</div>
-        		</div>
-        	</div>
-
-        	<div class="span6">
-        		<div id="register-wraper">
-        		    <form action="register.html" method="post" id="registerForm" class="form">
-        		        <h3>Register to <span class="blue">M.C by Jason</span></h3>
-        		    
-        		        <div class="body">
-        		        	<!-- Username -->
-        		        	<label>Username</label>
-        		        	<input type="text" name="j_rusername" id="j_rusername" class="input-medium"/>
-        		        	<label id="usernameErrorInfo" style="display: none;" class="alert"></label>
-
-        		        	<!-- email -->
-        		        	<label>E-mail</label>
-        		        	<input type="text" name="j_remail" id="j_remail" class="input-huge"/>
-        		        	<label id="emailErrorInfo" style="display: none;" class="alert">Please input a valid email address.</label>
-        		        	<br />
-        		        	<!-- password -->
-        		        	<label>Password</label>
-        		        	<input type="password" name="j_rpassword1" id="j_rpassword1" class="input-huge"/>
-        		  			<label id="passwordErrorInfo" style="display: none;" class="alert">Password length: 8-20.</label>
-        		  			<br />
-							<!-- confirm password -->
-        		        	<label>Confirm Password</label>
-        		        	<input type="password" name="j_rpassword2" id="j_rpassword2" class="input-huge"/>
-        		        	<label id="passwordNotMatchErrorInfo" style="display: none;" class="alert">Password does not match.</label>
-        		        	<br />
-        		        </div>
-        		    
-        		        <div class="footer">
-        		            <label class="checkbox inline">
-        		                <input type="checkbox" id="inlineCheckbox1" value="option1"> I agree to something I will never read
-        		            </label><br/>
-        		            <button type="submit" class="btn btn-success">Register</button>
-        		        </div>
-        		    </form>
-        		</div>
-        	</div>
-        </div>
-    </div>
+	
 	
 	
 	
@@ -159,63 +104,105 @@
 	    	</div>
 	  	</div>
 	</div>
-    	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        		<h4 class="modal-title" id="myModalLabel">Reset Password</h4>
-	      		</div>
-	      		<div class="modal-body">
-	      			<form action="forgetpassword.html" method="post" id="resetPwdForm" class="form">
-	      				<div class="body">
-	      					<!-- Username -->
-        		        	<label>Username</label>
-        		        	<input type="text" name="j_username1" id="j_username1" class="input-huge"/>
-        		        	<label>Email</label>
-        		        	<input type="text" name="j_email1" id="j_email1" class="input-huge"/>
-        		        	<label>Firstname</label>
-        		        	<input type="text" name="j_firstname1" id="j_firstname1" class="input-huge"/>
-        		        	<label>Lastname</label>
-        		        	<input type="text" name="j_lastname1" id="j_lastname1" class="input-huge"/>
-	      				</div>
-	      			</form>
-	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary" id="resetPwd">Reset Password</button>
-	      		</div>
-	    	</div>
-	  	</div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Reset Password</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- The form is placed inside the body of modal -->
+					<form action="forgetpassword.html" method="post" id="resetPwdForm" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Username</label>
+							<div class="col-md-5">
+								<input type="text" name="j_username1" id="j_username1" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email</label>
+							<div class="col-md-5">
+								<input type="text" name="j_email1" id="j_email1" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">First Name</label>
+							<div class="col-md-5">
+								<input type="text" name="j_firstname1" id="j_firstname1" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Last Name</label>
+							<div class="col-md-5">
+								<input type="text" name="j_lastname1" id="j_lastname1" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-5 col-md-offset-3">
+							<button type="button" class="btn btn-default" 
+								data-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-primary" 
+	        					id="resetPwd">Reset Password</button>
+	        				</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	    	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        		<h4 class="modal-title" id="myModalLabel">Reactivate</h4>
-	      		</div>
-	      		<div class="modal-body">
-	      			<form action="reactivate.html" method="post" id="reactivateForm" class="form">
-	      				<div class="body">
-	      					<!-- Username -->
-        		        	<label>Username</label>
-        		        	<input type="text" name="j_username2" id="j_username2" class="input-huge"/>
-        		        	<label>Email</label>
-        		        	<input type="text" name="j_email2" id="j_email2" class="input-huge"/>
-        		        	<label>Password</label>
-        		        	<input type="password" name="j_password2" id="j_password2" class="input-huge"/>
-	      				</div>
-	      			</form>
-	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary" id="reactivate">reactivate</button>
-	      		</div>
-	    	</div>
-	  	</div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Reactivate</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- The form is placed inside the body of modal -->
+					<form action="reactivate.html" method="post" id="reactivateForm" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Username</label>
+							<div class="col-md-5">
+								<input type="text" name="j_username2" id="j_username2" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email</label>
+							<div class="col-md-5">
+								<input type="text" name="j_email2" id="j_email2" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_password2" id="j_password2" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-5 col-md-offset-3">
+							<button type="button" class="btn btn-default" 
+								data-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-primary" 
+	        					id="reactivate">Reactivate</button>
+	        				</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-		    	<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	
+	<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 	    	<div class="modal-content">
 	      		<div class="modal-header">
@@ -223,26 +210,57 @@
 	        		<h4 class="modal-title" id="myModalLabel">Sign Up, it's free and always will be</h4>
 	      		</div>
 	      		<div class="modal-body">
-	      			<form action="signup.html" method="post" id="signupForm" class="form">
-	      				<div class="body">
-	      					<!-- Username -->
-        		        	<label>Username</label>
-        		        	<input type="text" name="j_username3" id="j_username3" class="input-huge"/>
-        		        	<label>Email</label>
-        		        	<input type="text" name="j_email3" id="j_email3" class="input-huge"/>
-        		        	<label>Password</label>
-        		        	<input type="password" name="j_password3" id="j_password3" class="input-huge"/>
-        		        	<label>First Name</label>
-        		        	<input type="text" name="j_firstname3" id="j_firstname3" class="input-huge"/>
-        		        	<label>Last Name</label>
-        		        	<input type="text" name="j_lastname3" id="j_lastname3" class="input-huge"/>
-	      				</div>
-	      			</form>
-	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary" id="signup">signup</button>
-	      		</div>
+					<!-- The form is placed inside the body of modal -->
+					<form action="signup.html" method="post" id="signupForm" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Username</label>
+							<div class="col-md-5">
+								<input type="text" name="j_username3" id="j_username3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email</label>
+							<div class="col-md-5">
+								<input type="text" name="j_email3" id="j_email3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_password3" id="j_password3" class="input-huge"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-3 control-label">Confirm Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_cfpassword" id="j_cfpassword" class="input-huge"/>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label class="col-md-3 control-label">First Name</label>
+							<div class="col-md-5">
+								<input type="text" name="j_firstname3" id="j_firstname3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Last Name</label>
+							<div class="col-md-5">
+								<input type="text" name="j_lastname3" id="j_lastname3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-5 col-md-offset-3">
+							<button type="button" class="btn btn-default" 
+								data-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-primary" 
+	        					id="signup">Sign-Up</button>
+	        				</div>
+						</div>
+					</form>
+				</div>
 	    	</div>
 	  	</div>
 	</div>

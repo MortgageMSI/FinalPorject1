@@ -3,6 +3,7 @@ package com.mercury.dao;
 import java.util.List;
 
 
+import com.mercury.beans.Rate;
 import com.mercury.beans.User1;
 
 public interface HelloDao {
@@ -18,4 +19,5 @@ public interface HelloDao {
 	public Boolean findByUsernamepassword(String username, String password);
 	public User1 findUserByEmail(String email);
 	public Boolean findByAll(String username, String firstname, String lastname, String email);
+	public Rate getRate(int rid);
 }
