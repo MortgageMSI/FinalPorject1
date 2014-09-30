@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.simple.JSONArray;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +18,8 @@ import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
 import com.mercury.dao.HelloDao;
 import com.mercury.functions.md5Converter;
+import com.mercury.logic.MCalculator;
+
 
 @Service
 @Transactional
@@ -128,6 +131,8 @@ public class HelloService implements UserDetailsService {
 		userInfo.setUser(hd.findByUsername(user.getUsername()));
 		return userInfo;
 	}
+	
+
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

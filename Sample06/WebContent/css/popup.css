@@ -1,0 +1,4 @@
+.mesWindow{border:lightblue 1px solid; border-radius: 15px; background:#fff;}
+.mesWindowTop{margin: 3px;border-bottom:#eee  1px  solid;margin-left:4px; padding: 3px;font-weight:bold;text-align:left;font-size:12p x;}  
+.mesWindowContent{margin:4px;font-size:12px;}  
+.mesWindow .close{border: 1px solid red;height:15px;width:28px;cursor:pointer;text-decoration:underline;background:#fff; padding: 0px; background: red;}

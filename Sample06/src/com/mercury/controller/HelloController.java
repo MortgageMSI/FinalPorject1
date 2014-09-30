@@ -38,20 +38,32 @@ public class HelloController {
 		this.viewPage = viewPage;
 	}
 	
-	@RequestMapping(value="/signup", method = RequestMethod.GET)
-	public ModelAndView mainPage() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("signup");
-		mav.addObject("title", "Sign Up, it's free and always will be");
-
-		return mav;
-	}
+//	@RequestMapping(value="/signup", method = RequestMethod.GET)
+//	public ModelAndView mainPage() {	
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("signup");
+//		mav.addObject("title", "Sign Up, it's free and always will be");
+//
+//		return mav;
+//	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public ModelAndView process(ModelMap model, User1 user,
+	public ModelAndView process(ModelMap model,
 			HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		//System.out.println(user.getUsername());
+		
+		String email = request.getParameter("j_email3");
+		String username = request.getParameter("j_username3");
+		String firstname = request.getParameter("j_firstname3");
+		String lastname = request.getParameter("j_lastname3");
+		String password = request.getParameter("j_password3");
+		User1 user = new User1();
+		user.setEmail(email);
+		user.setUsername(username);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		user.setPassword(password);
 		if(hs.register(user))
 		{	
 			//System.out.println("2");
@@ -106,36 +118,41 @@ public class HelloController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/reactivate", method = RequestMethod.GET)
-	public ModelAndView reactivate() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("reactivate");
-		return mav;
-	}
+//	@RequestMapping(value="/reactivate", method = RequestMethod.GET)
+//	public ModelAndView reactivate() {	
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("reactivate");
+//		return mav;
+//	}
 	
 	@RequestMapping(value="/reactivate", method=RequestMethod.POST)
 	public ModelAndView reactivate(ModelMap model,
 			HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
-		String username = request.getParameter("j_username");
-		String password = request.getParameter("j_password");
-		String email = request.getParameter("j_email");
+		String username = request.getParameter("j_username2");
+		String password = request.getParameter("j_password2");
+		String email = request.getParameter("j_email2");
+		
 		User1 user = new User1();
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setEmail(email);
-		System.out.println(user.getUsername());
+		System.out.println(username);
+		System.out.println(password);
+		System.out.println(email);
+		
 		if(hs.reactivate(user))
 		{	
 			//System.out.println("2");
 			//javaMail jm = new javaMail(user.getFirstname(),user.getLastname(),user.getEmail(),user.getUsername());
 			//jm.sendWelcomeEmail();
-			mav.setViewName("login");
+			mav.setViewName("systemmessage");
+			mav.addObject("title", "Welcome back!");
 		}
 		else{
 			//System.out.println("3");
 			mav.setViewName("systemmessage");
-			mav.addObject("title", "Welcome back!");
+			mav.addObject("title", "Sorry, cannot find a match");
 		}
 		return mav;
 	}
@@ -144,19 +161,19 @@ public class HelloController {
 	
 	
 	//send username if forget
-	@RequestMapping(value="/rusername", method = RequestMethod.GET)
-	public ModelAndView rusername() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("rusername");
-		return mav;
-	}
+//	@RequestMapping(value="/rusername", method = RequestMethod.GET)
+//	public ModelAndView rusername() {	
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("rusername");
+//		return mav;
+//	}
 	
-	@RequestMapping(value="/rusername", method=RequestMethod.POST)
-	public ModelAndView rusername(ModelMap model,
+	@RequestMapping(value="/rusername")
+	public ModelAndView rusername(
 			HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
 		String email = request.getParameter("j_email");
-		
+		System.out.println("3");
 		User1 user = new User1();
 		user.setEmail(email);
 		System.out.println(email);
@@ -177,21 +194,20 @@ public class HelloController {
 	}
 	
 	//forget password, send new password
-	@RequestMapping(value="/forgetpassword", method = RequestMethod.GET)
-	public ModelAndView forgetpassword() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("forgetpassword");
-		return mav;
-	}
+//	@RequestMapping(value="/forgetpassword", method = RequestMethod.GET)
+//	public ModelAndView forgetpassword() {	
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("forgetpassword");
+//		return mav;
+//	}
 	
-	@RequestMapping(value="/forgetpassword", method=RequestMethod.POST)
-	public ModelAndView forgetpassword(ModelMap model,
-			HttpServletRequest request) throws NoSuchAlgorithmException {
+	@RequestMapping(value="/forgetpassword")
+	public ModelAndView forgetpassword(HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
-		String email = request.getParameter("j_email");
-		String username = request.getParameter("j_username");
-		String firstname = request.getParameter("j_firstname");
-		String lastname = request.getParameter("j_lastname");
+		String email = request.getParameter("j_email1");
+		String username = request.getParameter("j_username1");
+		String firstname = request.getParameter("j_firstname1");
+		String lastname = request.getParameter("j_lastname1");
 		User1 user = new User1();
 		user.setEmail(email);
 		user.setUsername(username);

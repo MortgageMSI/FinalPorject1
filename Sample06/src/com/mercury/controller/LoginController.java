@@ -9,15 +9,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/login")
 	public String login(ModelMap model) {
+
 		return "login";
 	}
 	
-	@RequestMapping(value="/main", method = RequestMethod.GET)
+	@RequestMapping(value="/main")
 	public ModelAndView mainPage() {	
 		ModelAndView mav = new ModelAndView();
+		System.out.println("1");
 		mav.setViewName("inside");
+		mav.addObject("info", "data");
 		return mav;
 		
 	}
