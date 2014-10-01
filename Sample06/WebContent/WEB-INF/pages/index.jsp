@@ -96,6 +96,8 @@
 	        					<tr id="armBody1">
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Extra</label></td>
 	        						<td><input id="loan_extra" name="loan_extra" class="input-small" type="text"/></td>
+	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Term</label></td>
+	        						<td><input id="loan_term" name="loan_term" class="input-small" type="text"/></td>
 	        					</tr>
 	        				</table>
 	        			</div>

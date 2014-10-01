@@ -324,10 +324,9 @@ public class HelloController {
 		else{
 		loan_extra1=Integer.parseInt(request.getParameter("loan_extra"));
 		}
-		System.out.println(loan_extra1);
 		int loan_early=Integer.parseInt(request.getParameter("loan_early"));
+		loan_early=-loan_early;
 
-		System.out.println(loan_early);
 //		if(loan_type==null)
 //			loan_type="Fixed";
 //		double expected_adjustment = 0;
@@ -337,12 +336,17 @@ public class HelloController {
 //	    	   ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
 //	    	   System.out.println(toJson.convert(mb));
 //	    	   
+			int loan =(int) (loan_amount-loan_amount*down_payment);
 	    	   //////////////
 	    	   MCalculator c = new MCalculator();
 	    	   Rate r = hs.getRate(loan_term);
 	    	   double apr = r.getRate();
 	    	   ////////////////////
-	    	   JSONArray json=c.calculator(loan_amount,apr, loan_term*12,loan_early,loan_extra1);
+	    	   
+	    	   //test all variables
+	    	   System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	    	   System.out.println(loan+" "+apr+" "+loan_term*12+" "+loan_early+" "+loan_extra1);
+	    	   JSONArray json=c.calculator(loan,apr, loan_term*12,loan_early,loan_extra1);
 	    	   
 	    	   //String abc = "{\"firstone\":"+json.toString()+"}";
 	    	   System.out.println(json.toString());

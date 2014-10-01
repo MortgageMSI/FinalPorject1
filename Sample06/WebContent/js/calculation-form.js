@@ -81,7 +81,8 @@ $(document).ready(function(){
 			armBody1.show();
 			$("#loan_extra").val(0);
 			loan_e=$("#loan_extra").val();
-			early=0;
+			$("#loan_term").val(0);
+			early=$("#loan_term").val();
 		}
 		else{
 			armTitle.hide();
@@ -176,10 +177,16 @@ $(document).ready(function(){
 			
 			if(type0.is(":checked")){
 				var x= $("#loan_extra").val();
+				var y= $("#loan_term").val();
 				if(x!=0)
 				loan_e=$("#loan_extra").val();
 				else
 				loan_e=0;
+				if(y!=0)
+				early=$("#loan_term").val();
+				else
+				early=0;
+				
 			}
 		
 			// change to ajax later
