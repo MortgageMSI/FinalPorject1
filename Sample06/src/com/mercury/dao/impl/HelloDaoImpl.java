@@ -118,9 +118,9 @@ public class HelloDaoImpl implements HelloDao {
 	
 	
 	@Override
-	public Rate getRate(int rid) {
+	public Rate getRate(int term) {
 		// TODO Auto-generated method stub
-		return template.load(Rate.class, rid);
+		return (Rate)template.findByCriteria(DetachedCriteria.forClass(Rate.class).add(Restrictions.eq("term", term))).get(0);
 	}
 
 

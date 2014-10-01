@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
@@ -17,6 +18,7 @@ import com.mercury.beans.Rate;
 import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
 import com.mercury.functions.ComplexReturnType;
+import com.mercury.functions.MCalculator;
 import com.mercury.functions.MortgageCalculator;
 import com.mercury.functions.javaMail;
 import com.mercury.functions.md5Converter;
@@ -289,9 +291,26 @@ public class HelloController {
 	
 	
 	
+//	@RequestMapping(value="/calculate", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String getInput(HttpServletRequest request){
+//		int loan_amount = Integer.parseInt(request.getParameter("loan_amount"));
+//		double down_payment = Double.parseDouble(request.getParameter("down_payment"));
+//		int loan_term = Integer.parseInt(request.getParameter("loanTerm"));
+//		String loan_type = request.getParameter("loanType");
+//		if(loan_type==null)
+//			loan_type="Fixed";
+//		double expected_adjustment = 0;
+//			   expected_adjustment = Double.parseDouble(request.getParameter("expected_adjustment"));
+//	    double rate_gap = 0;
+//	    	   rate_gap = Double.parseDouble(request.getParameter("rate_gap"));
+//		ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
+//		return toJson.convert(mb);
+//	}
+	
 	@RequestMapping(value="/calculate", method=RequestMethod.POST)
 	@ResponseBody
-	public String getInput(HttpServletRequest request){
+	public String getInput1(HttpServletRequest request) throws Exception{
 		int loan_amount = Integer.parseInt(request.getParameter("loan_amount"));
 		double down_payment = Double.parseDouble(request.getParameter("down_payment"));
 		int loan_term = Integer.parseInt(request.getParameter("loanTerm"));
@@ -302,9 +321,23 @@ public class HelloController {
 			   expected_adjustment = Double.parseDouble(request.getParameter("expected_adjustment"));
 	    double rate_gap = 0;
 	    	   rate_gap = Double.parseDouble(request.getParameter("rate_gap"));
-		ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
-		return toJson.convert(mb);
+	    	   ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
+	    	   System.out.println(toJson.convert(mb));
+	    	   
+	    	   //////////////
+	    	   MCalculator c = new MCalculator();
+	    	   Rate r = hs.getRate(loan_term);
+	    	   double apr = r.getRate();
+	    	   ////////////////////
+	    	   JSONArray json=c.calculator(loan_amount,apr, loan_term*12,0,0);
+	    	   System.out.println(json.toString());
+	   		return json.toString();
+
 	}
+	
+	
+	
+	
 	
 	private ComplexReturnType parseAndCalculate(int loan_amount, double down_payment, int loan_term, 
 											String loan_type, double expected_adjustment, double rate_gap){
@@ -315,7 +348,8 @@ public class HelloController {
 		if(!loan_type.equals("Fixed"))
 			num_of_arms = Integer.parseInt(loan_type.substring(0, 1));
 		
-		Rate rate = hs.getRate(loan_term/10);
+		//Rate rate = hs.getRate(loan_term/10);
+		Rate rate = hs.getRate(loan_term);
 		double start_rate = rate.getRate()/100;
 		
 //		System.out.println("INPUT PARAMETERS:");

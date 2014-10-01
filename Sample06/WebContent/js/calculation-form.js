@@ -267,18 +267,42 @@ $(document).ready(function(){
 		table_year.draw(yearTable, {showRowNumber: true, page: 'enable', pageSize: 5});
 		
 		// Set monthly table
+//		var count = 0;
+//		for(;returnData.monthlySchedule[count]!=null;count++);
+//		var monthTable = new google.visualization.DataTable();
+//		monthTable.addColumn('string','Month');
+//		monthTable.addColumn('number','Payment');
+//		monthTable.addColumn('number','Remain');
+//		monthTable.addRows(count);
+//		var ms = returnData.monthlySchedule;
+//		for(var i=0; ms[i]!=null; i++){
+//			monthTable.setCell(i,0,ms[i].time);
+//			monthTable.setCell(i,1,ms[i].payment.payment);
+//			monthTable.setCell(i,2,ms[i].payment.remain);
+//		}
+//		
+//		var table_month = new google.visualization.Table(document.getElementById('monthly_table'));
+//		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 10});
+		
+		
+		alert("2");
 		var count = 0;
-		for(;returnData.monthlySchedule[count]!=null;count++);
+		
+		for(;returnData[count]!=null;count++);
 		var monthTable = new google.visualization.DataTable();
 		monthTable.addColumn('string','Month');
 		monthTable.addColumn('number','Payment');
+		monthTable.addColumn('number','Monthly Principle');
+		monthTable.addColumn('number','Monthly Interest');
 		monthTable.addColumn('number','Remain');
 		monthTable.addRows(count);
-		var ms = returnData.monthlySchedule;
+		var ms = returnData;
 		for(var i=0; ms[i]!=null; i++){
-			monthTable.setCell(i,0,ms[i].time);
-			monthTable.setCell(i,1,ms[i].payment.payment);
-			monthTable.setCell(i,2,ms[i].payment.remain);
+			monthTable.setCell(i,0,ms[i].month);
+			monthTable.setCell(i,1,ms[i].payment);
+			monthTable.setCell(i,2,ms[i].principle);
+			monthTable.setCell(i,3,ms[i].interest);
+			monthTable.setCell(i,4,ms[i].remaining);
 		}
 		
 		var table_month = new google.visualization.Table(document.getElementById('monthly_table'));

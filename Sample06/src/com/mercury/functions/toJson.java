@@ -56,6 +56,8 @@ public class toJson {
 		}
 		month.add(null);
 		result.put("monthlySchedule", month);
+		System.out.println(JSONValue.toJSONString(result));
 		return JSONValue.toJSONString(result);
+		
 	}
 }

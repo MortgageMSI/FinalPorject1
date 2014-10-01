@@ -19,7 +19,7 @@ import com.mercury.beans.User1;
 import com.mercury.beans.UserInfo;
 import com.mercury.dao.HelloDao;
 import com.mercury.functions.md5Converter;
-import com.mercury.logic.MCalculator;
+import com.mercury.functions.MCalculator;
 
 
 @Service
@@ -134,6 +134,7 @@ public class HelloService implements UserDetailsService {
 	}
 	
 	public Rate getRate(int rid){
+
 		return hd.getRate(rid);
 	}
 	
