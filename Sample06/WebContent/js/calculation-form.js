@@ -19,8 +19,11 @@ $(document).ready(function(){
 	var check1 = $("#loanTerm_30");
 	var check2 = $("#loanTerm_20");
 	var check3 = $("#loanTerm_15");
+	
+	var early=0;
+	var loan_e=0;
 	check1.click(function(){
-		$("[name='loanType']").prop("disabled", false);
+		//$("[name='loanType']").prop("disabled", false);
 	});
 	check2.click(loanTermSettting);
 	check3.click(loanTermSettting);
@@ -29,30 +32,63 @@ $(document).ready(function(){
 	var type1 = $("#loanType_5_Year_ARM");
 	var type2 = $("#loanType_7_Year_ARM");
 	var type3 = $("#loanType_10_Year_ARM");
+	type1.click(function(){
+		early=-60;
+		$("#loan_extra").val(0);
+		loan_e=0;
+
+	});
+	type0.click(function(){
+		early=0;
+		$("#loan_extra").val(0);
+		loan_e=0;
+		loan_e=$("#loan_extra").val();
+
+	});
+	type2.click(function(){
+		early=-84;
+		$("#loan_extra").val(0);
+		loan_e=0;
+
+	});
+	type3.click(function(){
+		early=-120;
+		$("#loan_extra").val(0);
+		loan_e=0
+	});
 	
 	var armBody = $("#armBody");
+	var armBody1 = $("#armBody1");
 	var armTitle = $("#armTitle");
-	armTitle.hide();
+	armTitle.show();
 	armBody.hide();
+	armBody1.show();
 	
 	var types = $("[name='loanType']");
 	types.on("change", loanTypeSetting);
 	
 	function loanTermSettting(){
-		$("#loanType_fixed_rate").prop("checked", true);
-		types.prop("disabled", true);
+		//$("#loanType_fixed_rate").prop("checked", true);
+		//types.prop("disabled", true);
 	}
+	
 	
 	function loanTypeSetting(){
 		//var fix = $("#loanType_fixed_rate");
 		if(type0.is(":checked")){
-			armTitle.hide();
-			armBody.hide();
+			armTitle.show();
+			//armBody.show();
+			armBody1.show();
+			$("#loan_extra").val(0);
+			loan_e=$("#loan_extra").val();
+			early=0;
 		}
 		else{
-			armTitle.show();
-			armBody.show();
-		}			
+			armTitle.hide();
+			armBody.hide();
+			armBody1.hide();
+		}		
+		
 	}
 	
 	var loan_amount = $("#loan_amount");
@@ -135,9 +171,20 @@ $(document).ready(function(){
 				expected_adjustment.val("0");
 				rate_gap.val("0");
 			}
+			
+			////////////////////////////////
+			
+			if(type0.is(":checked")){
+				var x= $("#loan_extra").val();
+				if(x!=0)
+				loan_e=$("#loan_extra").val();
+				else
+				loan_e=0;
+			}
+		
 			// change to ajax later
 			//$("#calculateForm").submit();
-			
+			//alert(loan_e);
 			$.ajax({
 				url: "calculate.html",
 				async: false,
@@ -148,7 +195,9 @@ $(document).ready(function(){
 					loanTerm: $("input[type='radio'][name='loanTerm']:checked").val(),
 					loanType: $("input[type='radio'][name='loanType']:checked").val(),
 					expected_adjustment: $("#expected_adjustment").val(),
-					rate_gap: $("#rate_gap").val()
+					rate_gap: $("#rate_gap").val(),
+					loan_early: early,
+					loan_extra:loan_e
 				},
 				dataType:"json",
 				success: function(returnData){
@@ -210,15 +259,17 @@ $(document).ready(function(){
 	
 	function setData(returnData){
 		// Set literal text
+
 		var resultText = "";
 		var sub1 ="";
 		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
 			sub1 = "fixed";
 		else
+			//returnData.yearSchedule[0].year_monthly
 			sub1 = "adjustable";
 			resultText += "Your "+sub1+" rate loan of $"+$("#loan_amount").val()
 						+" for "+$("input[type='radio'][name='loanTerm']:checked").val()+" years with "+($("#down_payment").val()*100)
-						+"% down payment has a starting payment of $"+returnData.yearSchedule[0].year_monthly
+						+"% down payment has a starting payment of $"
 						+". ";
 		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
 		resultText += "Your interest rate remains fixed for 60 months, after that time your interest rate is expected to change by "+$("#expected_adjustment").val()
@@ -227,44 +278,44 @@ $(document).ready(function(){
 		$("#literalResultWrapper").show();
 		
 		// Set total pie chart
-		var totalTable = new google.visualization.DataTable();
-		totalTable.addColumn('string', 'Type');
-		totalTable.addColumn('number', 'Amount');
-		totalTable.addRows(2);
-		totalTable.setCell(0,0,"Principle");
-		var p = $("#loan_amount").val() * (1-$("#down_payment").val());
-		totalTable.setCell(0,1,p);
-		totalTable.setCell(1,0,"Interests");
-		totalTable.setCell(1,1,(returnData.total-p).toFixed(2));
-		
-		var legend = {
-				position: 'left', 
-				textStyle: {color: 'blue', fontSize: 16}
-		};
-		var options_pie_total = {
-			legend: legend,
-			is3D: true,
-			pieStartAngle:15
-		};
-		
-		var pie_total = new google.visualization.PieChart(document.getElementById('total_pie'));
-		pie_total.draw(totalTable,options_pie_total);
+//		var totalTable = new google.visualization.DataTable();
+//		totalTable.addColumn('string', 'Type');
+//		totalTable.addColumn('number', 'Amount');
+//		totalTable.addRows(2);
+//		totalTable.setCell(0,0,"Principle");
+//		var p = $("#loan_amount").val() * (1-$("#down_payment").val());
+//		totalTable.setCell(0,1,p);
+//		totalTable.setCell(1,0,"Interests");
+//		totalTable.setCell(1,1,(returnData.total-p).toFixed(2));
+//		
+//		var legend = {
+//				position: 'left', 
+//				textStyle: {color: 'blue', fontSize: 16}
+//		};
+//		var options_pie_total = {
+//			legend: legend,
+//			is3D: true,
+//			pieStartAngle:15
+//		};
+//		
+//		var pie_total = new google.visualization.PieChart(document.getElementById('total_pie'));
+//		pie_total.draw(totalTable,options_pie_total);
 		
 		// Set annual table
-		var yearTable = new google.visualization.DataTable();
-		yearTable.addColumn('number', 'Year');
-		yearTable.addColumn('number', 'Monthly Payment');
-		yearTable.addColumn('number', 'Annual Payment');
-		yearTable.addRows(30);
-		var year = new Date().getFullYear();
-		for(var i=0; returnData.yearSchedule[i]!=null; i++){
-			yearTable.setCell(i,0,(year+i));
-			yearTable.setCell(i,1,returnData.yearSchedule[i].year_monthly);
-			yearTable.setCell(i,2,returnData.yearSchedule[i].year_total);
-		}
-		
-		var table_year = new google.visualization.Table(document.getElementById('annual_table'));
-		table_year.draw(yearTable, {showRowNumber: true, page: 'enable', pageSize: 5});
+//		var yearTable = new google.visualization.DataTable();
+//		yearTable.addColumn('number', 'Year');
+//		yearTable.addColumn('number', 'Monthly Payment');
+//		yearTable.addColumn('number', 'Annual Payment');
+//		yearTable.addRows(30);
+//		var year = new Date().getFullYear();
+//		for(var i=0; returnData.yearSchedule[i]!=null; i++){
+//			yearTable.setCell(i,0,(year+i));
+//			yearTable.setCell(i,1,returnData.yearSchedule[i].year_monthly);
+//			yearTable.setCell(i,2,returnData.yearSchedule[i].year_total);
+//		}
+//		
+//		var table_year = new google.visualization.Table(document.getElementById('annual_table'));
+//		table_year.draw(yearTable, {showRowNumber: true, page: 'enable', pageSize: 5});
 		
 		// Set monthly table
 //		var count = 0;
@@ -284,43 +335,47 @@ $(document).ready(function(){
 //		var table_month = new google.visualization.Table(document.getElementById('monthly_table'));
 //		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 10});
 		
-		
-		alert("2");
+
+
 		var count = 0;
-		
+		//////////////////
+
 		for(;returnData[count]!=null;count++);
 		var monthTable = new google.visualization.DataTable();
-		monthTable.addColumn('string','Month');
+		monthTable.addColumn('number','Month');
 		monthTable.addColumn('number','Payment');
 		monthTable.addColumn('number','Monthly Principle');
 		monthTable.addColumn('number','Monthly Interest');
 		monthTable.addColumn('number','Remain');
 		monthTable.addRows(count);
+
 		var ms = returnData;
-		for(var i=0; ms[i]!=null; i++){
+		for(i=0; ms[i]!=null; i++){
+
 			monthTable.setCell(i,0,ms[i].month);
 			monthTable.setCell(i,1,ms[i].payment);
 			monthTable.setCell(i,2,ms[i].principle);
 			monthTable.setCell(i,3,ms[i].interest);
 			monthTable.setCell(i,4,ms[i].remaining);
+	
 		}
-		
+
 		var table_month = new google.visualization.Table(document.getElementById('monthly_table'));
-		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 10});
-		
-		var options_month_chart = {
-			title: "Monthly Schedule",
-			vAxis: {
-				title: 'Amount ($)',
-				gridlines: {
-					color: '#666', count: 6
-				}
-			}
-		};
-		
-		
-		var chart_month = new google.visualization.LineChart(document.getElementById('monthly_chart'));
-		chart_month.draw(monthTable, options_month_chart);
+		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 600});
+
+//		var options_month_chart = {
+//			title: "Monthly Schedule",
+//			vAxis: {
+//				title: 'Amount ($)',
+//				gridlines: {
+//					color: '#666', count: 6
+//				}
+//			}
+//		};
+//		
+//		
+//		var chart_month = new google.visualization.LineChart(document.getElementById('monthly_chart'));
+//		chart_month.draw(monthTable, options_month_chart);
 	      
 	}
 	

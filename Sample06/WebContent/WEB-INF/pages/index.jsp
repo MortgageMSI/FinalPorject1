@@ -63,25 +63,26 @@
         		        				</select>
         		        			</td>
 	        					</tr>
+
 	        					<tr><td colspan="4"><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(2);">Loan Term*</label></td></tr>
 	        					<tr align="center">
-        		        			<td><input name="loanTerm" id="loanTerm_30" type="radio" required="true" checked="checked" value="30">
-                						<label>30 years</label></td>
+                					<td><input name="loanTerm" id="loanTerm_15" type="radio" required="true" checked="checked" value="15">
+                						<label>15 years</label></td>
                 					<td><input name="loanTerm" id="loanTerm_20" type="radio" value="20">
                 						<label>20 years</label></td>
-                					<td><input name="loanTerm" id="loanTerm_15" type="radio" value="15">
-                						<label>15 years</label></td>
+                					<td><input name="loanTerm" id="loanTerm_30" type="radio"  value="30">
+                						<label>30 years</label></td>
                 					<td></td>
 	        					</tr>
 	        					<tr><td colspan="4"><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(3);">Loan Type*</label></td></tr>
 	        					<tr align="center">
-	        						<td><input name="loanType" id="loanType_fixed_rate" type="radio"  checked="checked" value="Fixed">
+	        						<td><input name="loanType" id="loanType_fixed_rate" type="radio"  checked="checked" value="0">
 	        							<label>Fixed rate</label></td>
-									<td><input name="loanType" id="loanType_5_Year_ARM" type="radio"   value="5/1 ARM">
+									<td><input name="loanType" id="loanType_5_Year_ARM" type="radio"   value="-60">
 										<label>5-year ARM</label></td>
-									<td><input name="loanType" id="loanType_7_Year_ARM" type="radio"   value="7/1 ARM">
+									<td><input name="loanType" id="loanType_7_Year_ARM" type="radio"   value="-84">
 										<label>7-year ARM</label></td>
-									<td><input name="loanType" id="loanType_10_Year_ARM" type="radio"   value="10/1 ARM">
+									<td><input name="loanType" id="loanType_10_Year_ARM" type="radio"   value="-120">
 										<label>10-year ARM</label></td>
 	        					</tr>
 	        					<tr id="armTitle"><td colspan="4">Arm Options*</td></tr>
@@ -90,6 +91,11 @@
 	        						<td><input type="text" class="input-small" name="expected_adjustment" id="expected_adjustment"/>%</td>
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(5);">Interest Gap</label></td>
 	        						<td><input type="text" name="rate_gap" id="rate_gap" class="input-small"/>%</td>
+	        		
+	        					</tr>
+	        					<tr id="armBody1">
+	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Extra</label></td>
+	        						<td><input id="loan_extra" name="loan_extra" class="input-small" type="text"/></td>
 	        					</tr>
 	        				</table>
 	        			</div>
@@ -139,8 +145,8 @@
 					                	<div data-toggle="collapse" data-parent="#parent" href="#category3" class="head-height">&nbsp;</div>
 					                </div><!--/accordion-heading-->
 					             	<div id="category3" class="accordion-body collapse">
-					             		<div id="monthly_table" class="insideDiv"></div>
-					             		<div id="monthly_chart" class="insideDiv"></div>
+					             			<div id="monthly_table"></div>
+					             		
 					            	</div>
 					          	</div>
         					</div>
@@ -181,6 +187,8 @@
 	    	</div>
 	  	</div>
 	</div>
+	
+
     <!-- JavaScript files
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

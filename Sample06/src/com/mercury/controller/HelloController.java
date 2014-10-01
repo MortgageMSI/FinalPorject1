@@ -314,22 +314,37 @@ public class HelloController {
 		int loan_amount = Integer.parseInt(request.getParameter("loan_amount"));
 		double down_payment = Double.parseDouble(request.getParameter("down_payment"));
 		int loan_term = Integer.parseInt(request.getParameter("loanTerm"));
-		String loan_type = request.getParameter("loanType");
-		if(loan_type==null)
-			loan_type="Fixed";
-		double expected_adjustment = 0;
-			   expected_adjustment = Double.parseDouble(request.getParameter("expected_adjustment"));
-	    double rate_gap = 0;
-	    	   rate_gap = Double.parseDouble(request.getParameter("rate_gap"));
-	    	   ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
-	    	   System.out.println(toJson.convert(mb));
-	    	   
+		//String loan_type = request.getParameter("loanType");
+
+		System.out.println(request.getParameter("loan_extra").getClass().getName());
+		int loan_extra1;
+		if(request.getParameter("loan_extra")==null){
+		 loan_extra1=0;
+		}
+		else{
+		loan_extra1=Integer.parseInt(request.getParameter("loan_extra"));
+		}
+		System.out.println(loan_extra1);
+		int loan_early=Integer.parseInt(request.getParameter("loan_early"));
+
+		System.out.println(loan_early);
+//		if(loan_type==null)
+//			loan_type="Fixed";
+//		double expected_adjustment = 0;
+//			   expected_adjustment = Double.parseDouble(request.getParameter("expected_adjustment"));
+//	    double rate_gap = 0;
+//	    	   rate_gap = Double.parseDouble(request.getParameter("rate_gap"));
+//	    	   ComplexReturnType mb = parseAndCalculate(loan_amount, down_payment, loan_term, loan_type, expected_adjustment, rate_gap);
+//	    	   System.out.println(toJson.convert(mb));
+//	    	   
 	    	   //////////////
 	    	   MCalculator c = new MCalculator();
 	    	   Rate r = hs.getRate(loan_term);
 	    	   double apr = r.getRate();
 	    	   ////////////////////
-	    	   JSONArray json=c.calculator(loan_amount,apr, loan_term*12,0,0);
+	    	   JSONArray json=c.calculator(loan_amount,apr, loan_term*12,loan_early,loan_extra1);
+	    	   
+	    	   //String abc = "{\"firstone\":"+json.toString()+"}";
 	    	   System.out.println(json.toString());
 	   		return json.toString();
 
