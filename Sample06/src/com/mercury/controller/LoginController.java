@@ -33,6 +33,6 @@ public class LoginController {
 		String username = user.getUsername();
 		map.addAttribute("username", username);
 		map.addAttribute("message", "Welcome to M.C by Jason");
-		return "inside";
+		return "index";
 	}
 }

@@ -324,8 +324,9 @@ public class HelloController {
 		else{
 		loan_extra1=Integer.parseInt(request.getParameter("loan_extra"));
 		}
-		int loan_early=Integer.parseInt(request.getParameter("loan_early"));
-		loan_early=-loan_early;
+		System.out.println("loan_extra1"+loan_extra1);
+		int loan_early=-(Integer.parseInt(request.getParameter("loan_early")));
+		System.out.println("loan_early"+loan_early);
 
 //		if(loan_type==null)
 //			loan_type="Fixed";

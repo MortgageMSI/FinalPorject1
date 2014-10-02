@@ -56,8 +56,8 @@ public class MCalculator {
 		for (int i = 1; (i <=term && remaining>0); i++) {
 			
 			// in prepaid scenario
-			if(ARMCycle<0 && i<=-ARMCycle)monthlyPayment =mp1;
-			if(ARMCycle<0 && i>-ARMCycle) monthlyPayment =mp2;
+			if(ARMCycle<0 && i<=-ARMCycle)monthlyPayment =mp2;
+			if(ARMCycle<0 && i>-ARMCycle) monthlyPayment =mp1;
 			
 			if(ARMCycle>0 && i>ARMCycle &&(i%12==1)){
 				baseMonthRate = getArmRate(APR);
