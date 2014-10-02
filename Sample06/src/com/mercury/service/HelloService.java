@@ -138,7 +138,14 @@ public class HelloService implements UserDetailsService {
 		return hd.getRate(rid);
 	}
 	
-
+	public boolean checkUsernameValidation(String username){
+		return hd.nameIsExist(username);
+	}
+	
+	public boolean checkEmailValidation(String email){
+		return hd.emailIsExist(email);
+	}
+	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

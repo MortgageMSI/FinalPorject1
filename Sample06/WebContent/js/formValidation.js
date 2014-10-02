@@ -2,10 +2,10 @@
  * 
  */
 $(document).ready(function() {
-	var username = $("#j_rusername");
-	var email = $("#j_remail");
-	var password = $("#j_rpassword1");
-	var confirm_password = $("#j_rpassword2");
+	var username = $("#j_username3");
+	var email = $("#j_email3");
+	var password = $("#j_password3");
+	var confirm_password = $("#j_cfpassword");
 	var username1= $("#j_username1").val();
 	// flag is used when checking whether username & email exists
 	var flag = false;
@@ -16,14 +16,14 @@ $(document).ready(function() {
 	// on blur
 	username.blur(validateUsername);
 	email.blur(validateEmail);
-	password.blur(validatePassword);
+	//password.blur(validatePassword);
 	confirm_password.blur(validateConfirmPassword);
 			
 	// on keyup
-	username.keyup(validateUsername);
-	email.keyup(validateEmail);
-	password.keyup(validatePassword);
-	confirm_password.keyup(validateConfirmPassword);
+	//username.keyup(validateUsername);
+	//email.keyup(validateEmail);
+	//password.keyup(validatePassword);
+	//confirm_password.keyup(validateConfirmPassword);
 			
 	$("#registerForm").submit(function(){
 		if( validateUsername() && validateEmail() && validatePassword() && validateConfirmPassword() ){
@@ -36,17 +36,18 @@ $(document).ready(function() {
 			
 	function validateUsername(){
 		// if length invalid
-		if( username.val().length < 3 || username.val().length > 20){
-			$("#usernameErrorInfo").html("User name should contain more than 3 letters and up to 20 letters.");
-			$("#usernameErrorInfo").show();
-			username.removeClass("correct");
-			username.addClass("error");
+		if( username.val().length < 2 || username.val().length > 10){
+//			$("#usernameErrorInfo").html("User name should contain more than 3 letters and up to 20 letters.");
+//			$("#usernameErrorInfo").show();
+//			username.removeClass("correct");
+//			username.addClass("error");
+			$("#errormessage").hide();
 			falg = false;
 			return false;
 		}
 		// if length valid
 		else {
-			if (!flag){
+			//if (!flag){
 				$.ajax({
 					url: "checkExist.html",
 					data: {
@@ -57,28 +58,30 @@ $(document).ready(function() {
 					timeout: 5000,
 					success: function(msg){
 						if(msg=="exist"){
-							$("#usernameErrorInfo").html("Username exists!");
-							$("#usernameErrorInfo").show();
-							username.removeClass("correct");
-							username.addClass("error");
+//							$("#usernameErrorInfo").html("Username exists!");
+//							$("#usernameErrorInfo").show();
+//							username.removeClass("correct");
+//							username.addClass("error");
+							$("#errormessage").show();
 							flag = false;
 							return false;
 						}
 						else{
-							$("#usernameErrorInfo").hide();
-							username.removeClass("error");
-							username.addClass("correct");
+//							$("#usernameErrorInfo").hide();
+//							username.removeClass("error");
+//							username.addClass("correct");
+							$("#errormessage").hide();
 							flag = true;
 							return true;
 						}
 					},
 					error: function(){
-						alert("Network Error");
+						alert("Not able to connect to server");
 						flag = false;
 						return false;
 					}
 				});
-			}
+			//}
 			return true;
 		}
 	}
@@ -86,16 +89,13 @@ $(document).ready(function() {
 	function validateEmail(){
 		// if invalid
 		if(!re.test(email.val())){
-			$("#emailErrorInfo").html("Email invalid!");
-			$("#emailErrorInfo").show();
-			email.removeClass("correct");
-			email.addClass("error");
+			$("#errormessage1").hide();
 			flagEmail = false;
 			return false;
 		}
 		// if valid
 		else {
-			if(!flagEmail){
+			//if(!flagEmail){
 				$.ajax({
 					url: "checkEmailExist.html",
 					data: {
@@ -106,28 +106,30 @@ $(document).ready(function() {
 					timeout: 5000,
 					success: function(msg){
 						if(msg=="exist"){
-							$("#emailErrorInfo").html("Email exists!");
-							$("#emailErrorInfo").show();
-							email.removeClass("correct");
-							email.addClass("error");
+//							$("#emailErrorInfo").html("Email exists!");
+//							$("#emailErrorInfo").show();
+//							email.removeClass("correct");
+//							email.addClass("error");
+							$("#errormessage1").show();
 							flagEmail = false;
 							return false;
 						}
 						else{
-							$("#emailErrorInfo").hide();
-							email.removeClass("error");
-							email.addClass("correct");
+//							$("#emailErrorInfo").hide();
+//							email.removeClass("error");
+//							email.addClass("correct");
+							$("#errormessage1").hide();
 							flagEmail = true;
 							return true;
 						}
 					},
 					error: function(){
-						alert("Network Error");
+						alert("Not able to connect to server");
 						flagEmail = false;
 						return false;
 					}
 				});
-			}
+			//}
 			return true;
 		}
 	}
@@ -152,16 +154,16 @@ $(document).ready(function() {
 	function validateConfirmPassword(){
 		// if invalid
 		if(password.val()!=confirm_password.val()){
-			$("#passwordNotMatchErrorInfo").show();
-			confirm_password.removeClass("correct");
-			confirm_password.addClass("error");
+			$("#errormessage2").show();
+			//confirm_password.removeClass("correct");
+			//confirm_password.addClass("error");
 			return false;
 		}
 		// if valid
 		else {
-			$("#passwordNotMatchErrorInfo").hide();
-			confirm_password.removeClass("error");
-			confirm_password.addClass("correct");
+			$("#errormessage2").hide();
+			//confirm_password.removeClass("error");
+			//confirm_password.addClass("correct");
 			return true;
 		}
 	}
@@ -180,15 +182,25 @@ $(document).ready(function() {
 	
 	
 	
+
+	
+	
+	
+	
 	 //signup
 	var signupBtn = $("#signup");
 	var signupForm = $("#signupForm");
 	signupBtn.click(function(){
+		if( validateUsername() && validateEmail() && validateConfirmPassword() ){
+			$("#errormessage3").hide();
 		//if(($("#j_username3").val().length)<4){
 		//	alert("Please input valid username!");
 		//}
 		//else
 			signupForm.submit();
+		}
+			else
+				{$("#errormessage3").show();}
 	});
 	
 	 //reactivate

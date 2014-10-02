@@ -356,6 +356,27 @@ public class HelloController {
 	}
 	
 	
+	@RequestMapping(value="/checkExist")
+	@ResponseBody
+	public String checkExist(HttpServletRequest request){
+		String username = request.getParameter("username");
+		if (hs.checkUsernameValidation(username))
+			return "exist";
+		else
+			return "no";
+	}
+	
+	@RequestMapping(value="/checkEmailExist")
+	@ResponseBody
+	public String checkEmailExist(HttpServletRequest request){
+		String email = request.getParameter("email");
+		if (hs.checkEmailValidation(email))
+			return "exist";
+		else
+			return "no";
+	}
+	
+	
 	
 	
 	

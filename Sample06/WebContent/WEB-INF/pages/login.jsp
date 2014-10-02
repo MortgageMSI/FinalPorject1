@@ -98,8 +98,8 @@
         		        	<label>Email</label>
         		        	<input type="email" name="j_email" ng-model="user.email" required id="j_email" class="input-huge"/>
         		        	<br />
-        		        	<span ng-show="rusername.j_email.$dirty && rusername.j_email.$error.required">Email is required</span>
-        		        	<span ng-show="rusername.j_email.$dirty && rusername.j_email.$error.email">Email is not valid</span>
+        		        	<span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.required">Email is required</span>
+        		        	<span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.email">Email is not valid</span>
 	      				</div>
 	      			</form>
 	      		</div>
@@ -127,37 +127,37 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Username</label>
 							<div class="col-md-5">
-								<input type="text" name="j_username1" ng-model="user.username" required ng-minlength="3" ng-maxlength="10" id="j_username1" class="input-huge"/>
+								<input type="text" name="j_username1" ng-model="user.username1" required ng-minlength="3" ng-maxlength="10" id="j_username1" class="input-huge"/>
 							<br />
-        		        	<span ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.required">Username is required</span>
-        		        	<span ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.minlength">Username is too short</span>
-        		        	<span ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.maxlength">Username is too long</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.required">Username is required</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.minlength">Username is too short</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_username1.$dirty && forgetpassword.j_username1.$error.maxlength">Username is too long</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email</label>
 							<div class="col-md-5">
-								<input type="email" name="j_email1" ng-model="user.email" required id="j_email1" class="input-huge"/>
+								<input type="email" name="j_email1" ng-model="user.email1" required id="j_email1" class="input-huge"/>
 								        		        	<br />
-        		        	<span ng-show="forgetpassword.j_email1.$dirty && forgetpassword.j_email1.$error.required">Email is required</span>
-        		        	<span ng-show="forgetpassword.j_email1.$dirty && forgetpassword.j_email1.$error.email">Email is not valid</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_email1.$dirty && forgetpassword.j_email1.$error.required">Email is required</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_email1.$dirty && forgetpassword.j_email1.$error.email">Email is not valid</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">First Name</label>
 							<div class="col-md-5">
-								<input type="text" name="j_firstname1" ng-model="user.firstname" required id="j_firstname1" class="input-huge"/>
+								<input type="text" name="j_firstname1" ng-model="user.firstname1" required id="j_firstname1" class="input-huge"/>
 								        		        	<br />
-        		        	<span ng-show="forgetpassword.j_firstname1.$dirty && forgetpassword.j_firstname1.$error.required">Firstname is required</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_firstname1.$dirty && forgetpassword.j_firstname1.$error.required">Firstname is required</span>
         		     
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Last Name</label>
 							<div class="col-md-5">
-								<input type="text" name="j_lastname1" ng-model="user.lastname" required id="j_lastname1" class="input-huge"/>
+								<input type="text" name="j_lastname1" ng-model="user.lastname1" required id="j_lastname1" class="input-huge"/>
 								        		        	<br />
-        		        	<span ng-show="forgetpassword.j_lastname1.$dirty && forgetpassword.j_lastname1.$error.required">Firstname is required</span>
+        		        	<span style="color:red" ng-show="forgetpassword.j_lastname1.$dirty && forgetpassword.j_lastname1.$error.required">Firstname is required</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -190,30 +190,30 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Username</label>
 							<div class="col-md-5">
-								<input type="text" name="j_username2" ng-model="user.username" ng-minlength="3" ng-maxlength="10" required id="j_username2" class="input-huge"/>
+								<input type="text" name="j_username2" ng-model="user.username2" ng-minlength="3" ng-maxlength="10" required id="j_username2" class="input-huge"/>
 							<br />
-							<span ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.required">Username is required</span>
-        		        	<span ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.minlength">Username is too short</span>
-        		        	<span ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.maxlength">Username is too long</span>
+							<span style="color:red" ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.required">Username is required</span>
+        		        	<span style="color:red" ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.minlength">Username is too short</span>
+        		        	<span style="color:red" ng-show="reactivate.j_username2.$dirty && reactivate.j_username2.$error.maxlength">Username is too long</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email</label>
 							<div class="col-md-5">
-								<input type="email" name="j_email2" ng-model="user.email" required id="j_email2" class="input-huge"/>
+								<input type="email" name="j_email2" ng-model="user.email2" required id="j_email2" class="input-huge"/>
 							<br />
-        		        	<span ng-show="reactivate.j_email2.$dirty && reactivate.j_email2.$error.required">Email is required</span>
-        		        	<span ng-show="reactivate.j_email2.$dirty && reactivate.j_email2.$error.email">Email is not valid</span>
+        		        	<span style="color:red" ng-show="reactivate.j_email2.$dirty && reactivate.j_email2.$error.required">Email is required</span>
+        		        	<span style="color:red" ng-show="reactivate.j_email2.$dirty && reactivate.j_email2.$error.email">Email is not valid</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_password2" ng-model="user.password" required ng-minlength="3" ng-maxlength="10" id="j_password2" class="input-huge"/>
+								<input type="password" name="j_password2" ng-model="user.password2" required ng-minlength="3" ng-maxlength="10" id="j_password2" class="input-huge"/>
 							<br />	        		        	
-							<span ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.required">Password is required</span>
-        		        	<span ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.minlength">Password is too short</span>
-        		        	<span ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.maxlength">Password is too long</span>
+							<span style="color:red" ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.minlength">Password is too short</span>
+        		        	<span style="color:red" ng-show="reactivate.j_password2.$dirty && reactivate.j_password2.$error.maxlength">Password is too long</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -244,40 +244,43 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">Username</label>
 							<div class="col-md-5">
-								<input type="text" name="j_username3" ng-model="user.username" ng-minlength="3" ng-maxlength="10" required id="j_username3" class="input-huge"/>															<br />
-							<span ng-show="signup.j_username3.$dirty && signup.j_username3.$error.required">Username is required</span>
-        		        	<span ng-show="signup.j_username3.$dirty && signup.j_username3.$error.minlength">Username should have length of 3-10</span>
-        		        	<span ng-show="signup.j_username3.$dirty && signup.j_username3.$error.maxlength">Username should have length of 3-10</span>
+								<input type="text" name="j_username3" ng-model="user.username3" ng-minlength="3" ng-maxlength="10" required id="j_username3" class="input-huge"/>															<br />
+							<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.required">Username is required</span>
+        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.minlength">Username should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.maxlength">Username should have length of 3-10</span>
+        		        	<span id="errormessage" style="display: none; color:red;">Username already exists</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email</label>
 							<div class="col-md-5">
-								<input type="email" name="j_email3" ng-model="user.email" required id="j_email3" class="input-huge"/>
+								<input type="email" name="j_email3" ng-model="user.email3" required id="j_email3" class="input-huge"/>
 							<br />
-        		        	<span ng-show="signup.j_email3.$dirty && signup.j_email3.$error.required">Email is required</span>
-        		        	<span ng-show="signup.j_email3.$dirty && signup.j_email3.$error.email">Email is not valid</span>
+        		        	<span style="color:red" ng-show="signup.j_email3.$dirty && signup.j_email3.$error.required">Email is required</span>
+        		        	<span style="color:red" ng-show="signup.j_email3.$dirty && signup.j_email3.$error.email">Email is not valid</span>
+        		        	<span id="errormessage1" style="display: none; color:red;">Email already exists</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_password3" ng-model="user.password" required ng-minlength="3" ng-maxlength="10" id="j_password3" class="input-huge"/>
+								<input type="password" name="j_password3" ng-model="user.password3" required ng-minlength="3" ng-maxlength="10" id="j_password3" class="input-huge"/>
 															<br />	        		        	
-							<span ng-show="signup.j_password3.$dirty && signup.j_password3.$error.required">Password is required</span>
-        		        	<span ng-show="signup.j_password3.$dirty && signup.j_password3.$error.minlength">Password should have length of 3-10</span>
-        		        	<span ng-show="signup.j_password3.$dirty && signup.j_password3.$error.maxlength">Password should have length of 3-10</span>
+							<span style="color:red" ng-show="signup.j_password3.$dirty && signup.j_password3.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="signup.j_password3.$dirty && signup.j_password3.$error.minlength">Password should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="signup.j_password3.$dirty && signup.j_password3.$error.maxlength">Password should have length of 3-10</span>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-md-3 control-label">Confirm Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_cfpassword" ng-model="user.password1" required ng-minlength="3" ng-maxlength="10" id="j_cfpassword" class="input-huge"/>
+								<input type="password" name="j_cfpassword" ng-model="user.password4" required ng-minlength="3" ng-maxlength="10" id="j_cfpassword" class="input-huge"/>
 							<br />	        		        	
-							<span ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.required">Password is required</span>
-        		        	<span ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.minlength">Password should have length of 3-10</span>
-        		        	<span ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.maxlength">Password should have length of 3-10</span>
+							<span style="color:red" ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.minlength">Password should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="signup.j_cfpassword.$dirty && signup.j_cfpassword.$error.maxlength">Password should have length of 3-10</span>
+							<span id="errormessage2" style="display: none; color:red;">Password does not match</span>
 							</div>
 						</div>
 						
@@ -285,18 +288,26 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label">First Name</label>
 							<div class="col-md-5">
-								<input type="text" name="j_firstname3" ng-model="user.firstname" required id="j_firstname3" class="input-huge"/>
+								<input type="text" name="j_firstname3" ng-model="user.firstname3" required id="j_firstname3" class="input-huge"/>
 																        		        	<br />
-        		        	<span ng-show="signup.j_firstname3.$dirty && signup.j_firstname3.$error.required">Firstname is required</span>
+        		        	<span style="color:red" ng-show="signup.j_firstname3.$dirty && signup.j_firstname3.$error.required">Firstname is required</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Last Name</label>
 							<div class="col-md-5">
-								<input type="text" name="j_lastname3" ng-model="user.lastname" required id="j_lastname3" class="input-huge"/>
+								<input type="text" name="j_lastname3" ng-model="user.lastname3" required id="j_lastname3" class="input-huge"/>
 																        		        	<br />
-        		        	<span ng-show="signup.j_lastname3.$dirty && signup.j_lastname3.$error.required">Firstname is required</span>
+        		        	<span style="color:red" ng-show="signup.j_lastname3.$dirty && signup.j_lastname3.$error.required">Firstname is required</span>
 							</div>
+						</div>
+						
+						<div class="form-group">
+							
+							<div class="col-md-5">
+
+        		        <span style="color:red" id="errormessage3" style="display: none;">Please fix</span>
+
 						</div>
 						<div class="form-group">
 							<div class="col-md-5 col-md-offset-3">
