@@ -54,7 +54,7 @@ $(document).ready(function(){
 	type3.click(function(){
 		early=-120;
 		$("#loan_extra").val(0);
-		loan_e=0
+		loan_e=0;
 	});
 	
 	var armBody = $("#armBody");

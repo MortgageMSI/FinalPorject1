@@ -20,19 +20,19 @@ $(document).ready(function() {
 	confirm_password.blur(validateConfirmPassword);
 			
 	// on keyup
-	//username.keyup(validateUsername);
-	//email.keyup(validateEmail);
+	username.keyup(validateUsername);
+	email.keyup(validateEmail);
 	password.keyup(validatePassword);
 	confirm_password.keyup(validateConfirmPassword);
 			
-//	$("#registerForm").submit(function(){
-//		if( validateUsername() && validateEmail() && validatePassword() && validateConfirmPassword() ){
-//			var r = confirm("Username and Email cannot be changed after registration. Do you want to continue?");
-//			return r;
-//		}		
-//		else
-//			return false;
-//	});
+	$("#registerForm").submit(function(){
+		if( validateUsername() && validateEmail() && validatePassword() && validateConfirmPassword() ){
+			var r = confirm("Username and Email cannot be changed after registration. Do you want to continue?");
+			return r;
+		}		
+		else
+			return false;
+	});
 			
 	function validateUsername(){
 		// if length invalid
@@ -132,51 +132,51 @@ $(document).ready(function() {
 		}
 	}
 			
-//	function validatePassword(){
-//		// if invalid
-//		if(password.val().length<8 || password.val().length>20){
-//			$("#passwordErrorInfo").show();
-//			password.removeClass("correct");
-//			password.addClass("error");
-//			return false;
-//		}
-//		// if valid
-//		else {
-//			$("#passwordErrorInfo").hide();
-//			password.removeClass("error");
-//			password.addClass("correct");
-//			return true;
-//		}
-//	}
-//	
-//	function validateConfirmPassword(){
-//		// if invalid
-//		if(password.val()!=confirm_password.val()){
-//			$("#passwordNotMatchErrorInfo").show();
-//			confirm_password.removeClass("correct");
-//			confirm_password.addClass("error");
-//			return false;
-//		}
-//		// if valid
-//		else {
-//			$("#passwordNotMatchErrorInfo").hide();
-//			confirm_password.removeClass("error");
-//			confirm_password.addClass("correct");
-//			return true;
-//		}
-//	}
+	function validatePassword(){
+		// if invalid
+		if(password.val().length<8 || password.val().length>20){
+			$("#passwordErrorInfo").show();
+			password.removeClass("correct");
+			password.addClass("error");
+			return false;
+		}
+		// if valid
+		else {
+			$("#passwordErrorInfo").hide();
+			password.removeClass("error");
+			password.addClass("correct");
+			return true;
+		}
+	}
+	
+	function validateConfirmPassword(){
+		// if invalid
+		if(password.val()!=confirm_password.val()){
+			$("#passwordNotMatchErrorInfo").show();
+			confirm_password.removeClass("correct");
+			confirm_password.addClass("error");
+			return false;
+		}
+		// if valid
+		else {
+			$("#passwordNotMatchErrorInfo").hide();
+			confirm_password.removeClass("error");
+			confirm_password.addClass("correct");
+			return true;
+		}
+	}
 	
 	
-//	// change password
-//	var changeBtn = $("#changepwd");
-//	var changeForm = $("#changePwdForm");
-//	changeBtn.click(function(){
-//		if (validatePassword() && validateConfirmPassword())
-//			changeForm.submit();
-//		else{
-//			alert("Password invalid!");
-//		}
-//	});
+	// change password
+	var changeBtn = $("#changepwd");
+	var changeForm = $("#changePwdForm");
+	changeBtn.click(function(){
+		if (validatePassword() && validateConfirmPassword())
+			changeForm.submit();
+		else{
+			alert("Password invalid!");
+		}
+	});
 	
 	
 	
