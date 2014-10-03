@@ -23,7 +23,9 @@
     	<property name="viewPage" value="resulttest"/>
     	<property name="mc" ref="mc"/>
     </bean>
-    <bean id="loginController" class="com.mercury.controller.LoginController"/>
+    <bean id="loginController" class="com.mercury.controller.LoginController">
+    	<property name="hs" ref="helloService"/>
+    </bean>
     <bean id="helloService" class="com.mercury.service.HelloService">
     	<property name="hd" ref="helloDao"/>
     </bean>

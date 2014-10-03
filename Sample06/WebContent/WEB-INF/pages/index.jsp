@@ -130,9 +130,10 @@ Back to top button
 						<ul class="dropdown-menu">
 							<li><a href="#" data-toggle="modal" data-target="#myModal1">Change Password</a></li>
 							<li><a href="#" data-toggle="modal" data-target="#myModal2">Deactivate Account</a></li>
-							<li><a href="#" data-toggle="modal" data-target="#myModal3">Delete User</a></li>
+							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a href="#" data-toggle="modal" data-target="#myModal3">Delete User</a></li>
 							<li class="divider"></li>
 							<li><a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a class="btn btn-black">${userrole}</a></li>
 						</ul>
 				</form>
 			</div>
