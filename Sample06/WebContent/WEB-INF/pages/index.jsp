@@ -151,30 +151,40 @@ Back to top button
 
 				<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="cpasswordForm" method="post" action="cpassword.html" name="cpassword" class="form-horizontal">
+					<form id="cpasswordForm" method="post" novalidate action="cpassword.html" name="cpassword" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-md-3 control-label">Old Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_opassword" id="j_opassword" class="input-huge"/>
+								<input type="password" name="j_opassword" ng-model="user.opassword" ng-minlength="3" ng-maxlength="10" required id="j_opassword" class="input-huge"/>
+							<span style="color:red" ng-show="cpassword.j_opassword.$dirty && cpassword.j_opassword.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="cpassword.j_opassword.$dirty && cpassword.j_opassword.$error.minlength">Password should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="cpassword.j_opassword.$dirty && cpassword.j_opassword.$error.maxlength">Password should have length of 3-10</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">New Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_npassword" id="j_npassword" class="input-huge"/>
+								<input type="password" name="j_npassword" ng-model="user.npassword" ng-minlength="3" ng-maxlength="10" required id="j_npassword" class="input-huge"/>
+								<span style="color:red" ng-show="cpassword.j_npassword.$dirty && cpassword.j_npassword.$error.required">Password is required</span>
+        		        		<span style="color:red" ng-show="cpassword.j_npassword.$dirty && cpassword.j_npassword.$error.minlength">Password should have length of 3-10</span>
+        		        		<span style="color:red" ng-show="cpassword.j_npassword.$dirty && cpassword.j_npassword.$error.maxlength">Password should have length of 3-10</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Confirm Password</label>
-							<div class="col-md-5">
-								<input type="password" name="j_cnpassword" id="j_cnpassword" class="input-huge"/>
+							<div class="col-md-5">								
+								<input type="password" name="j_cnpassword" ng-model="user.cnpassword" ng-minlength="3" ng-maxlength="10" required id="j_cnpassword" class="input-huge"/>
+							<span style="color:red" ng-show="cpassword.j_cnpassword.$dirty && cpassword.j_cnpassword.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="cpassword.j_cnpassword.$dirty && cpassword.j_cnpassword.$error.minlength">Password should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="cpassword.j_cnpassword.$dirty && cpassword.j_cnpassword.$error.maxlength">Password should have length of 3-10</span>
+							<span id="errormessage6" style="display: none; color:red;">Password does not match</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-5 col-md-offset-3">
 							<button type="button" class="btn btn-default" 
 								data-dismiss="modal">Close</button>
-	        				<button type="button" class="btn btn-primary" 
+	        				<button type="button" ng-disabled="cpassword.$invalid" class="btn btn-primary" 
 	        					id="cpassword">Confirm</button>
 	        				</div>
 						</div>

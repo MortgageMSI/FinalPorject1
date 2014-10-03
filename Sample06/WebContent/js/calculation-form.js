@@ -13,7 +13,25 @@ function setMsgAndTitle(num){
 }
 
 $(document).ready(function(){
+	var j_cnpassword1=$("#j_cnpassword");
+	var j_npassword1=$("#j_npassword");
+	j_cnpassword1.blur(validateConfirmPassword);
 	
+	function validateConfirmPassword(){
+		// if invalid
+		if(j_npassword1.val()!=j_cnpassword1.val()){
+			$("#errormessage6").show();
+
+			return false;
+		}
+		// if valid
+		else {
+			$("#errormessage6").hide();
+			//confirm_password.removeClass("error");
+			//confirm_password.addClass("correct");
+			return true;
+		}
+	}
 	var j_demail1 = $("#j_demail1");
 	var labels = $("label[class='input-small']");
 	labels.css('cursor', 'help');
@@ -413,19 +431,16 @@ $(document).ready(function(){
 	}
 	
 	
-	
-	
-	
-	
 	// change password
 	var cpasswordBtn = $("#cpassword");
 	var cpasswordForm = $("#cpasswordForm");
 	cpasswordBtn.click(function(){
-		//if(!re.test($("#j_email").val())){
-		//	alert("Please input a valid email!");
-		//}
-		//else
+		if(validateConfirmPassword()){
 			cpasswordForm.submit();
+			$("#errormessage6").hide();
+		}
+		else
+			$("#errormessage6").show();
 	});
 	
 	
@@ -459,7 +474,13 @@ $(document).ready(function(){
 	
 	
 	function validateEmail1(){
-				if($.ajax({
+			var st=true;
+			if(1==2){
+				return true;
+			}
+			else
+				{
+				$.ajax({
 					url: "delete.html",
 					data: {
 						j_demail1: j_demail1.val()
@@ -469,21 +490,22 @@ $(document).ready(function(){
 					timeout: 5000,
 					success: function(msg){
 						if(msg=="false"){
+							st=false;
 							return false;
 						}
 						else{
+							st=true;
 							return true;
 						}
 					},
 					error: function(){
 						alert("Not able to connect to server");
+						st=false;
 						return false;
 					}
-				}))
-					return true;
-				else
-				return false;
-		
+				});
+					return st;
+				}
 		}
 	
 	

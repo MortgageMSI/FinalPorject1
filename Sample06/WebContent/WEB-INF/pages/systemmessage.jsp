@@ -15,7 +15,7 @@
 <h2><font color="green">${title}</font></h2>
 
     <div>
-      <a href="login.html" class="btn btn-black">Go back to main page</a>
+      <a href="main.html" class="btn btn-black">Go back to main page</a>
     </div>
 
 </body>
