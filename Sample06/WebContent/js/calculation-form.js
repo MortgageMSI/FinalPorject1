@@ -8,74 +8,94 @@ var msgs = new Array("The total amount paid by a buyer to a seller for the purch
 		"This is the highest interest rate allowed by your mortgage. Your actual interest rate will not be adjusted above this rate.");
 var titles = new Array("Purchase price/sales price","Down payment","Loan Term", "Loan Type", "Expected Adjustment", "Interest Rate Gap");
 function setMsgAndTitle(num){
-	popupMsg = msgs[num];
-	popupTitle = titles[num];
+//	popupMsg = msgs[num];
+//	popupTitle = titles[num];
 }
 
 $(document).ready(function(){
 	var labels = $("label[class='input-small']");
 	labels.css('cursor', 'help');
 	// Calculate form validation
-	var check1 = $("#loanTerm_30");
-	var check2 = $("#loanTerm_20");
-	var check3 = $("#loanTerm_15");
+	//var check1 = $("#loanTerm_30");
+	//var check2 = $("#loanTerm_20");
+	//var check3 = $("#loanTerm_15");
+	
+	var loanTerm=$("#loanTerm");
+	
 	
 	var early=0;
 	var loan_e=0;
-	check1.click(function(){
+	early=0;
+	$("#loan_extra").val(0);
+	loan_e=0;
+	$("#loan_term").val(0);
+	//check1.click(function(){
 		//$("[name='loanType']").prop("disabled", false);
-	});
-	check2.click(loanTermSettting);
-	check3.click(loanTermSettting);
+	//});
+	//check2.click(loanTermSettting);
+	//check3.click(loanTermSettting);
 	
-	var type0 = $("#loanType_fixed_rate");
-	var type1 = $("#loanType_5_Year_ARM");
-	var type2 = $("#loanType_7_Year_ARM");
-	var type3 = $("#loanType_10_Year_ARM");
-	type1.click(function(){
-		early=-60;
-		$("#loan_extra").val(0);
-		loan_e=0;
-
-	});
-	type0.click(function(){
-		early=0;
-		$("#loan_extra").val(0);
-		loan_e=0;
-		loan_e=$("#loan_extra").val();
-
-	});
-	type2.click(function(){
-		early=-84;
-		$("#loan_extra").val(0);
-		loan_e=0;
-
-	});
-	type3.click(function(){
-		early=-120;
-		$("#loan_extra").val(0);
-		loan_e=0;
-	});
+//	var type0 = $("#loanType_fixed_rate");
+//	var type1 = $("#loanType_5_Year_ARM");
+//	var type2 = $("#loanType_7_Year_ARM");
+//	var type3 = $("#loanType_10_Year_ARM");
 	
-	var armBody = $("#armBody");
+	var loanType=$("#loanType");
+	loanType.change(function(){
+			early=0;
+			$("#loan_extra").val(0);
+			loan_e=0;
+			$("#loan_term").val(0);
+        
+    });
+	
+	
+	
+	
+//	type1.click(function(){
+//		early=-60;
+//		$("#loan_extra").val(0);
+//		loan_e=0;
+//
+//	});
+//	type0.click(function(){
+//		early=0;
+//		$("#loan_extra").val(0);
+//		loan_e=0;
+//		loan_e=$("#loan_extra").val();
+//
+//	});
+//	type2.click(function(){
+//		early=-84;
+//		$("#loan_extra").val(0);
+//		loan_e=0;
+//
+//	});
+//	type3.click(function(){
+//		early=-120;
+//		$("#loan_extra").val(0);
+//		loan_e=0;
+//	});
+	
 	var armBody1 = $("#armBody1");
+	var armBody = $("#armBody");
 	var armTitle = $("#armTitle");
 	armTitle.show();
-	armBody.hide();
 	armBody1.show();
+	armBody.hide();
 	
 	var types = $("[name='loanType']");
 	types.on("change", loanTypeSetting);
 	
-	function loanTermSettting(){
+	//function loanTermSettting(){
 		//$("#loanType_fixed_rate").prop("checked", true);
 		//types.prop("disabled", true);
-	}
+	//}
 	
 	
 	function loanTypeSetting(){
 		//var fix = $("#loanType_fixed_rate");
-		if(type0.is(":checked")){
+		if($("#loanType").val()==0){
 			armTitle.show();
 			//armBody.show();
 			armBody1.show();
@@ -86,8 +106,12 @@ $(document).ready(function(){
 		}
 		else{
 			armTitle.hide();
-			armBody.hide();
+
 			armBody1.hide();
+			$("#loan_extra").val(0);
+			loan_e=$("#loan_extra").val();
+			$("#loan_term").val(0);
+			early=$("#loan_term").val();
 		}		
 		
 	}
@@ -167,30 +191,36 @@ $(document).ready(function(){
 	}
 	
 	$("#calculate").click(function(){
-		if( validateAmount() && validateExpectedAdjustment() && validateRateGap() ){
-			if( !type1.is(":checked") && !type2.is(":checked") && !type3.is(":checked")){
-				expected_adjustment.val("0");
-				rate_gap.val("0");
-			}
+		//if( validateAmount() && validateExpectedAdjustment() && validateRateGap() ){
+			//if( !type1.is(":checked") && !type2.is(":checked") && !type3.is(":checked")){
+			//	expected_adjustment.val("0");
+			//	rate_gap.val("0");
+			//}
 			
 			////////////////////////////////
 			
-			if(type0.is(":checked")){
-				var x= $("#loan_extra").val();
-				var y= $("#loan_term").val();
-				if(x!=0)
-				loan_e=$("#loan_extra").val();
-				else
+			if(loanType.val()!=0){
+				//var x= $("#loan_extra").val();
+				//var y= $("#loan_term").val();
+				//if(x!=0)
+				//loan_e=$("#loan_extra").val();
 				loan_e=0;
-				if(y!=0)
-				early=$("#loan_term").val();
+				early=loanType.val();
+			}
 				else
-				early=0;
+					{
+				loan_e=$("#loan_extra").val();
+				//if(y!=0)
+				early=$("#loan_term").val();
 				
 			}
 		
 			// change to ajax later
 			//$("#calculateForm").submit();
+			//alert( $("#loan_amount").val());
+			//alert($("#down_payment").val());
+			//alert(loanTerm.val());
+			//alert(early);
 			//alert(loan_e);
 			$.ajax({
 				url: "calculate.html",
@@ -199,10 +229,8 @@ $(document).ready(function(){
 				data: {
 					loan_amount: $("#loan_amount").val(),
 					down_payment: $("#down_payment").val(),
-					loanTerm: $("input[type='radio'][name='loanTerm']:checked").val(),
-					loanType: $("input[type='radio'][name='loanType']:checked").val(),
-					expected_adjustment: $("#expected_adjustment").val(),
-					rate_gap: $("#rate_gap").val(),
+					loanTerm: loanTerm.val(),
+					loanType: $("loanType").val(),
 					loan_early: early,
 					loan_extra:loan_e
 				},
@@ -211,11 +239,7 @@ $(document).ready(function(){
 					setData(returnData);
 				}
 			});
-			
-			return true;
-		}		
-		else
-			return false;
+
 	});
 	
 	//collapsible menu
@@ -267,22 +291,22 @@ $(document).ready(function(){
 	function setData(returnData){
 		// Set literal text
 
-		var resultText = "";
-		var sub1 ="";
-		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
-			sub1 = "fixed";
-		else
-			//returnData.yearSchedule[0].year_monthly
-			sub1 = "adjustable";
-			resultText += "Your "+sub1+" rate loan of $"+$("#loan_amount").val()
-						+" for "+$("input[type='radio'][name='loanTerm']:checked").val()+" years with "+($("#down_payment").val()*100)
-						+"% down payment has a starting payment of $"
-						+". ";
-		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
-		resultText += "Your interest rate remains fixed for 60 months, after that time your interest rate is expected to change by "+$("#expected_adjustment").val()
-						+"% every 12 months. (Rates are random generated in this application. Since the economy of US is rejuvenating, rates have a higher change to grow up.)";
-		$("#literalResultText").html(resultText);
-		$("#literalResultWrapper").show();
+//		var resultText = "";
+//		var sub1 ="";
+//		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
+//			sub1 = "fixed";
+//		else
+//			//returnData.yearSchedule[0].year_monthly
+//			sub1 = "adjustable";
+//			resultText += "Your "+sub1+" rate loan of $"+$("#loan_amount").val()
+//						+" for "+$("input[type='radio'][name='loanTerm']:checked").val()+" years with "+($("#down_payment").val()*100)
+//						+"% down payment has a starting payment of $"
+//						+". ";
+//		if(expected_adjustment.val()!=0 && rate_gap.val()!=0)
+//		resultText += "Your interest rate remains fixed for 60 months, after that time your interest rate is expected to change by "+$("#expected_adjustment").val()
+//						+"% every 12 months. (Rates are random generated in this application. Since the economy of US is rejuvenating, rates have a higher change to grow up.)";
+//		$("#literalResultText").html(resultText);
+//		$("#literalResultWrapper").show();
 		
 		// Set total pie chart
 //		var totalTable = new google.visualization.DataTable();
@@ -343,27 +367,27 @@ $(document).ready(function(){
 //		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 10});
 		
 
-
-		var count = 0;
+		
+		
 		//////////////////
-
-		for(;returnData[count]!=null;count++);
+		
+		for(var count = 0;returnData[count]!=null;count++);
 		var monthTable = new google.visualization.DataTable();
 		monthTable.addColumn('number','Month');
 		monthTable.addColumn('number','Payment');
 		monthTable.addColumn('number','Monthly Principle');
 		monthTable.addColumn('number','Monthly Interest');
 		monthTable.addColumn('number','Remain');
-		monthTable.addRows(count);
-
-		var ms = returnData;
-		for(i=0; ms[i]!=null; i++){
-
+		monthTable.addRows(count);		
+		var ms = returnData;		
+		var i=0;		
+		for(; ms[i]!=null; i++){			
 			monthTable.setCell(i,0,ms[i].month);
 			monthTable.setCell(i,1,ms[i].payment);
 			monthTable.setCell(i,2,ms[i].principle);
 			monthTable.setCell(i,3,ms[i].interest);
 			monthTable.setCell(i,4,ms[i].remaining);
+
 	
 		}
 

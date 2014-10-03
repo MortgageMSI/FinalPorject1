@@ -1,59 +1,276 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<!-- Styles -->
-    <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet"/>
-    <link href="<c:url value='/bootstrap-3.1.1-dist/css/bootstrap-responsive.min.css'/>" rel="stylesheet"/>
-    <link href="<c:url value='/css/typica-login.css'/>" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
     <link href="<c:url value='/css/calculation-form.css'/>" rel="stylesheet"/>
     <link href="<c:url value='/css/popup.css'/>" rel="stylesheet"/>
-    <link rel="icon" href="<c:url value='/images/icon.ico'/>" type="icon" />
-    
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="<c:url value='/bootstrap-3.2.0-dist/css/bootstrap-responsive.min.css'/>" rel="stylesheet"/>
+       <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
     	google.load("visualization", "1", {packages:["corechart"]});
     	google.load("visualization", "1", {packages:["table"]});
     </script>
-    
+
 	<title>Mortgage Calculator</title>
+
+<style>
+/*
+Back to top button 
+*/
+#back-top {
+	position: fixed;
+	bottom: 30px;
+	margin-left: 1090px;
+}
+
+#back-top a {
+	width: 108px;
+	display: block;
+	text-align: center;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #bbb;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+
+#back-top a:hover {
+	color: #000;
+}
+/* arrow icon (span tag) */
+#back-top span {
+	width: 108px;
+	height: 108px;
+	display: block;
+	margin-bottom: 7px;
+	background: #ddd url(up-arrow.png) no-repeat center center;
+	/* rounded corners */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+
+#back-top a:hover span {
+	background-color: #777;
+}
+</style>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
+
+<script>
+
+	$(document).ready(function() {
+
+		// hide #back-top first
+		$("#back-top").hide();
+
+		// fade in #back-top
+		$(function() {
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 100) {
+					$('#back-top').fadeIn();
+				} else {
+					$('#back-top').fadeOut();
+				}
+			});
+
+			// scroll body to 0px on click
+			$('#back-top a').click(function() {
+				$('body,html').animate({
+					scrollTop : 0
+				}, 200);
+				return false;
+			});
+		});
+
+	});
+</script>
+	
 </head>
 <body>
-	<!-- <div id="loading" class="loadingimg" style="display:none;"><img src="<c:url value='/images/loading.gif'/>"/></div> -->
+
+<div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> 
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span>						
+				</button>
+				<a class="navbar-brand" href="#">Mortgage Calculator</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<form class="navbar-form navbar-right">
+					
+					<button type="button" class="btn btn-default dropdown-toggle" 
+					id="dropdown1" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>
+						${username}
+						<span class="caret"></span>
+					</button>
+						<ul class="dropdown-menu">
+							<li><a href="#" data-toggle="modal" data-target="#myModal1">Change Password</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#myModal2">Deactivate Account</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#myModal3">Delete User</a></li>
+							<li class="divider"></li>
+							<li><a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+						</ul>
+				</form>
+			</div>
+		</div>
+	</nav>
 	
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="main.html"><img src="<c:url value='/images/mortgage-calculator-logo.png'/>" alt="Mortgage Calculator Logo"></a>
-				<div class="userWindow">
-					<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">${username}</button>
-					<a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />" > Logout</a>
+	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Change Password</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- The form is placed inside the body of modal -->
+					<form id="changePwd" method="post" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Old Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_opassword" id="j_opassword" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">New Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_npassword" id="j_npassword" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Confirm Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_cnpassword" id="j_cnpassword" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-5 col-md-offset-3">
+							<button type="button" class="btn btn-default" 
+								data-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-primary" 
+	        					id="resetPwd">Confirm</button>
+	        				</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-    
-    <div class="container" onload="init();">
-        <div class="row">
-        	<!-- Input part -->
-        	<div class="span6">
-        		<div class="wrapper" id="literalResultWrapper" style="display:none;">
-	        		<h5 style="padding:2px;" id="literalResultText"></h5>
-	        	</div>
-        		<div class="wrapper"><!-- id="register-wraper" -->
-        			<h5 style="padding:2px;"><span class="blue">Estimate your closing costs</span><br/>Our closing costs estimator can help you estimate your total closing expenses. When working with the calculator, please remember the dollar amounts displayed arent guaranteed, and what you actually pay may be different. The estimates you receive are for illustrative and educational purposes only.</h5>
+	
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title" id="myModalLabel">Deactivate Account, You can always change your mind!</h4>
+	      		</div>
+	      		<div class="modal-body">
+					<!-- The form is placed inside the body of modal -->
+					<form id="deact" method="post" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Username</label>
+							<div class="col-md-5">
+								<input type="text" name="j_username3" id="j_username3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Email</label>
+							<div class="col-md-5">
+								<input type="text" name="j_email3" id="j_email3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Password</label>
+							<div class="col-md-5">
+								<input type="password" name="j_password3" id="j_password3" class="input-huge"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-5 col-md-offset-3">
+							<button type="button" class="btn btn-default" 
+								data-dismiss="modal">Close</button>
+	        				<button type="button" class="btn btn-primary" 
+	        					id="signup">Deactivate</button>
+	        				</div>
+						</div>
+					</form>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+	
+	
+	
+	<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title" id="myModalLabel">Delete User</h4>
+	      		</div>
+	      		<div class="modal-body">
+	      			<form action="rusername.html" novalidate name="rusername" method="post" id="retrievalUsernameForm" class="form">
+	      				<div class="body">
+	      					<!-- Email -->
+        		        	<label>Email</label>
+        		        	<input type="email" name="j_email" ng-model="user.email" required id="j_email" class="input-huge"/>
+	      					<br />
+                            	<span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.required">Email is required</span>
+	                            <span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.email">Email is not valid</span>
+	      				</div>
+	      			</form>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		<button type="button" ng-disabled="rusername.$invalid" class="btn btn-primary" id="retrievalUsername">Confirm Delete</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+	
+	
+	<!-- Main body -->
+	<div class="container" onload="init();" role="main">
+		<div class="jumbotron">
+			<!-- Add Stock Form -->
+			<div class="wrapper"><!-- id="register-wraper" -->
+        			<h3>Estimate Closing Costs</h3>
         			<form action="calculate.html" method="post" id="calculateForm" class="form">
-	        			<div class="body">
+	        			<div class="table-responsive">
 	        				<table class="table table-striped table-hover">
-	        					<tr><td colspan="4">* required</td></tr>
-	        					<tr align="center">
+	        					
+	        					<tr>
 	        					<!-- class="span2" -->
-	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Amount*</label></td>
+	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Amount</label></td>
 	        						<td><input id="loan_amount" name="loan_amount" class="input-small" type="text"/></td>
-	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(1);">Down Pay*</label></td>
+	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(1);">Down Pay</label></td>
         		        			<td>
         		        				<select id="down_payment" name="down_payment" class="selectpicker input-medium" data-style="btn-info">
         		        					<option value="0.05">5%</option>
@@ -64,35 +281,42 @@
         		        				</select>
         		        			</td>
 	        					</tr>
+	        					<tr>
+	        					<td>
+	        					<label class="input-small" onclick="testMessageBox(event);" 
+	        					onmouseover="setMsgAndTitle(2);">Loan Term</label>
+	        					
+	        					</td>
+        		        			<td>
+        		        				<select id="loanTerm" name="loanTerm" class="selectpicker input-medium" data-style="btn-info">
+        		        					<option id="loanTerm_30" value="30">30 Years</option>
+        		        					<option id="loanTerm_20" value="20">20 Years</option>
+        		        					<option id="loanTerm_15" value="15">15 Years</option>
+        		        				</select>
+        		        			</td>
+	        						<td><label class="input-small" onclick="testMessageBox(event);" 
+	        					onmouseover="setMsgAndTitle(3);">Loan Type</label></td>
+	        					<td>
+        		        				<select id="loanType" name="loanType" class="selectpicker input-medium" data-style="btn-info">
+        		        					<option id="loanType_fixed_rate" value="0">Fixed rate</option>
+        		        					<option id="loanType_5_Year_ARM" value="-60">5-year ARM</option>
+        		        					<option id="loanType_7_Year_ARM" value="-84">7-year ARM</option>
+        		        					<option id="loanType_10_Year_ARM" value="-120">10-year ARM</option>
+        		        				</select>
+        		        			</td>
+	        					
+	        					</tr>
+	        				
 
-	        					<tr><td colspan="4"><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(2);">Loan Term*</label></td></tr>
-	        					<tr align="center">
-                					<td><input name="loanTerm" id="loanTerm_15" type="radio" required="true" checked="checked" value="15">
-                						<label>15 years</label></td>
-                					<td><input name="loanTerm" id="loanTerm_20" type="radio" value="20">
-                						<label>20 years</label></td>
-                					<td><input name="loanTerm" id="loanTerm_30" type="radio"  value="30">
-                						<label>30 years</label></td>
-                					<td></td>
-	        					</tr>
-	        					<tr><td colspan="4"><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(3);">Loan Type*</label></td></tr>
-	        					<tr align="center">
-	        						<td><input name="loanType" id="loanType_fixed_rate" type="radio"  checked="checked" value="0">
-	        							<label>Fixed rate</label></td>
-									<td><input name="loanType" id="loanType_5_Year_ARM" type="radio"   value="-60">
-										<label>5-year ARM</label></td>
-									<td><input name="loanType" id="loanType_7_Year_ARM" type="radio"   value="-84">
-										<label>7-year ARM</label></td>
-									<td><input name="loanType" id="loanType_10_Year_ARM" type="radio"   value="-120">
-										<label>10-year ARM</label></td>
-	        					</tr>
-	        					<tr id="armTitle"><td colspan="4">Arm Options*</td></tr>
+										
+									
+
+	        					<tr id="armTitle"><td colspan="4">Arm Options</td></tr>
 	        					<tr id="armBody">
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(4);">Expected Adjustment</label></td>
 	        						<td><input type="text" class="input-small" name="expected_adjustment" id="expected_adjustment"/>%</td>
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(5);">Interest Gap</label></td>
 	        						<td><input type="text" name="rate_gap" id="rate_gap" class="input-small"/>%</td>
-	        		
 	        					</tr>
 	        					<tr id="armBody1">
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Extra</label></td>
@@ -111,11 +335,12 @@
         		        </div>
 	        		</form>
 	        	</div>
-        	</div>
-        	
-        	<!-- Result Part -->
-        	<div class="span6">
-        		<div class="wrapper"><!-- id="register-wraper" -->
+			<!-- End of Add Stock Form -->
+		</div>
+		<div class="jumbotron">
+			<!-- Show Stock Information -->
+			<h3>Show Result</h3>
+			<div class="wrapper"><!-- id="register-wraper" -->
         		<section id="accordion">
         			<a href="#_" class="expandcollapse btn btn-mini btn-primary pull-right" state="0">+ Expand All</a>
         			<ul class="nav nav-tabs" id="tabFAQ">
@@ -148,60 +373,42 @@
 					                	<div data-toggle="collapse" data-parent="#parent" href="#category3" class="head-height">&nbsp;</div>
 					                </div><!--/accordion-heading-->
 					             	<div id="category3" class="accordion-body collapse">
-					             			<div id="monthly_table"></div>
-					             		
+					             		<div id="monthly_table" class="insideDiv"></div>
+					             		<div id="monthly_chart" class="insideDiv"></div>
 					            	</div>
 					          	</div>
         					</div>
       					</div>
     				</div>
 				</section>
-        		</div>
         	</div>
-        </div>
-    </div>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-	    	<div class="modal-content">
-	      		<div class="modal-header">
-	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        		<h4 class="modal-title" id="myModalLabel">Change Password</h4>
-	      		</div>
-	      		<div class="modal-body">
-	      			<form action="changepwd.html" method="post" id="changePwdForm" class="form">
-	      				<div class="body">
-	      					<!-- password -->
-        		        	<label>Password</label>
-        		        	<input type="password" name="j_rpassword1" id="j_rpassword1" class="input-huge"/>
-        		  			<label id="passwordErrorInfo" style="display: none;" class="alert">Password length: 8-20.</label>
-        		  			
-							<!-- confirm password -->
-        		        	<label>Confirm Password</label>
-        		        	<input type="password" name="j_rpassword2" id="j_rpassword2" class="input-huge"/>
-        		        	<label id="passwordNotMatchErrorInfo" style="display: none;" class="alert">Password does not match.</label>
-	      				</div>
-	      			</form>
-	      		</div>
-	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" class="btn btn-primary" id="changepwd">Save changes</button>
-	      		</div>
-	    	</div>
-	  	</div>
+        	
+        	
+		</div>
+		
+		
 	</div>
 	
-
-    <!-- JavaScript files
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+	
+	<p id="back-top">
+		<a href="#top"><span></span>Back to Top</a>
+	</p>
+</div>	
+	
     <script src="<c:url value='/js/jquery-1.11.0.js'/>"></script>
-    <script src="<c:url value='/bootstrap-3.1.1-dist/js/bootstrap.min.js'/>"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		if ("<c:out value='${param.login_error}'/>" != "") {
+			  	alert("Login failed. Please check your username and password.");
+			}
+    	});
+    </script>
+    <script src="<c:url value='/js/formValidation.js'/>"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="<c:url value='/js/backstretch.min.js'/>"></script>
     <script src="<c:url value='/js/typica-login.js'/>"></script>
     <script src="<c:url value='/js/formValidation.js'/>"></script>
     <script src="<c:url value='/js/popup.js'/>"></script>
     <script src="<c:url value='/js/calculation-form.js'/>"></script>
-    
 </body>
 </html>
