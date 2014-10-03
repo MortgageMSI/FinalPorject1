@@ -203,30 +203,39 @@ Back to top button
 	      		</div>
 	      		<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="deactivateForm" method="post" action="deactivate.html" name="deactivate" class="form-horizontal">
+					<form id="deactivateForm" method="post" novalidate action="deactivate.html" name="deactivate" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-md-3 control-label">Username</label>
 							<div class="col-md-5">
-								<input type="text" name="j_dusername" id="j_dusername" class="input-huge"/>
+								<input type="text" name="j_dusername" ng-model="user.dusername1" ng-minlength="3" ng-maxlength="10" required id="j_dusername" class="input-huge"/>
+								<span style="color:red" ng-show="deactivate.j_dusername.$dirty && deactivate.j_dusername.$error.required">Username is required</span>
+        		        		<span style="color:red" ng-show="deactivate.j_dusername.$dirty && deactivate.j_dusername.$error.minlength">Username should have length of 3-10</span>
+        		        		<span style="color:red" ng-show="deactivate.j_dusername.$dirty && deactivate.j_dusername.$error.maxlength">Username should have length of 3-10</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email</label>
 							<div class="col-md-5">
-								<input type="text" name="j_demail" id="j_demail" class="input-huge"/>
+								<input type="text" name="j_demail" ng-model="user.demail" required id="j_demail" class="input-huge"/>
+								<span style="color:red" ng-show="deactivate.j_demail.$dirty && deactivate.j_demail.$error.required">Email is required</span>
+        		        	<span style="color:red" ng-show="deactivate.j_demail.$dirty && deactivate.j_demail.$error.email">Email is not valid</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_dpassword" id="j_dpassword" class="input-huge"/>
+								<input type="password" name="j_dpassword" ng-model="user.dpassword" required ng-minlength="3" ng-maxlength="10" id="j_dpassword" class="input-huge"/>
+								<span style="color:red" ng-show="deactivate.j_dpassword.$dirty && deactivate.j_dpassword.$error.required">Password is required</span>
+        		        	<span style="color:red" ng-show="deactivate.j_dpassword.$dirty && deactivate.j_dpassword.$error.minlength">Password should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="deactivate.j_dpassword.$dirty && deactivate.j_dpassword.$error.maxlength">Password should have length of 3-10</span>
+							
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-5 col-md-offset-3">
 							<button type="button" class="btn btn-default" 
 								data-dismiss="modal">Close</button>
-	        				<button type="button" class="btn btn-primary" 
+	        				<button type="button" ng-disabled="signup.$invalid" class="btn btn-primary" 
 	        					id="deactivate">Deactivate</button>
 	        				</div>
 						</div>
