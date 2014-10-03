@@ -40,7 +40,7 @@
 						<input type="text" class="form-control" placeholder="Username" name="j_username" id="j_username">
 						<input type="password" class="form-control" placeholder="Password" name="j_password" id="j_password">
 					</div>
-					<button type="submit" class="btn btn-default">
+					<button type="submit" class="btn btn-success">
 						<span class="glyphicon glyphicon-user"></span>
 						Sign-In
 					</button>
@@ -60,6 +60,8 @@
 							<li class="divider"></li>
 							<li><a href="#" data-toggle="modal" data-target="#myModal4">Register</a></li>
 						</ul>
+					<label style="color: #FFFFFF;"><input type="checkbox" name="_spring_security_remember_me" class="checkbox" checked="checked"/>	
+	                Remember Me</label>			                                        
 				</form>
 			</div>
 		</div>
@@ -306,14 +308,14 @@
 							
 							<div class="col-md-5">
 
-        		        <span style="color:red" id="errormessage3" style="display: none;">Please fix</span>
+        		        <span  id="errormessage3" style="display: none; color:red;">                 Please fix</span>
 
 						</div>
 						<div class="form-group">
 							<div class="col-md-5 col-md-offset-3">
 							<button type="button" class="btn btn-default" 
 								data-dismiss="modal">Close</button>
-	        				<button type="button" ng-disabled="signup.$invalid" class="btn btn-primary" 
+	        				<button type="button" ng-disabled="signup.$invalid" class="btn btn-success" 
 	        					id="signup">Sign-Up</button>
 	        				</div>
 						</div>

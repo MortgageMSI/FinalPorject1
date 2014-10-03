@@ -32,7 +32,6 @@ public class LoginController {
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = user.getUsername();
 		map.addAttribute("username", username);
-		map.addAttribute("message", "Welcome to M.C by Jason");
 		return "index";
 	}
 }

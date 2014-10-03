@@ -15,7 +15,10 @@
         	default-target-url="/main.html"
         	authentication-failure-url="/login.html?login_error=1" 
         />
+        
+        
         <sec:logout logout-success-url="/main.html"  delete-cookies="JSESSIONID"/>
+		<sec:remember-me token-validity-seconds="1209600"  />
 	</sec:http>
  	
 	<sec:authentication-manager alias="authenticationManager">
