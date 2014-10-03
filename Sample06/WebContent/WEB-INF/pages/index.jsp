@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
+<html ng-app>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
@@ -73,7 +73,7 @@ Back to top button
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
 
 <script>
-
+	var username=$(username);
 	$(document).ready(function() {
 
 		// hide #back-top first
@@ -151,7 +151,7 @@ Back to top button
 
 				<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="changePwd" method="post" class="form-horizontal">
+					<form id="cpasswordForm" method="post" action="cpassword.html" name="cpassword" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-md-3 control-label">Old Password</label>
 							<div class="col-md-5">
@@ -175,7 +175,7 @@ Back to top button
 							<button type="button" class="btn btn-default" 
 								data-dismiss="modal">Close</button>
 	        				<button type="button" class="btn btn-primary" 
-	        					id="resetPwd">Confirm</button>
+	        					id="cpassword">Confirm</button>
 	        				</div>
 						</div>
 					</form>
@@ -193,23 +193,23 @@ Back to top button
 	      		</div>
 	      		<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-					<form id="deact" method="post" class="form-horizontal">
+					<form id="deactivateForm" method="post" action="deactivate.html" name="deactivate" class="form-horizontal">
 						<div class="form-group">
 							<label class="col-md-3 control-label">Username</label>
 							<div class="col-md-5">
-								<input type="text" name="j_username3" id="j_username3" class="input-huge"/>
+								<input type="text" name="j_dusername" id="j_dusername" class="input-huge"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Email</label>
 							<div class="col-md-5">
-								<input type="text" name="j_email3" id="j_email3" class="input-huge"/>
+								<input type="text" name="j_demail" id="j_demail" class="input-huge"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Password</label>
 							<div class="col-md-5">
-								<input type="password" name="j_password3" id="j_password3" class="input-huge"/>
+								<input type="password" name="j_dpassword" id="j_dpassword" class="input-huge"/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -217,7 +217,7 @@ Back to top button
 							<button type="button" class="btn btn-default" 
 								data-dismiss="modal">Close</button>
 	        				<button type="button" class="btn btn-primary" 
-	        					id="signup">Deactivate</button>
+	        					id="deactivate">Deactivate</button>
 	        				</div>
 						</div>
 					</form>
@@ -236,20 +236,22 @@ Back to top button
 	        		<h4 class="modal-title" id="myModalLabel">Delete User</h4>
 	      		</div>
 	      		<div class="modal-body">
-	      			<form action="rusername.html" novalidate name="rusername" method="post" id="retrievalUsernameForm" class="form">
+	      			<form action="delete.html" novalidate name="delete" method="post" id="deleteForm" class="form">
 	      				<div class="body">
 	      					<!-- Email -->
         		        	<label>Email</label>
-        		        	<input type="email" name="j_email" ng-model="user.email" required id="j_email" class="input-huge"/>
+        		        	<input type="email" name="j_demail1" ng-model="user.demail1" required id="j_demail1" class="input-huge"/>
 	      					<br />
-                            	<span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.required">Email is required</span>
-	                            <span style="color:red" ng-show="rusername.j_email.$dirty && rusername.j_email.$error.email">Email is not valid</span>
+                            	<span style="color:red" ng-show="delete.j_demail1.$dirty && delete.j_demail1.$error.required">Email is required</span>
+	                            <span style="color:red" ng-show="delete.j_demail1.$dirty && delete.j_demail1.$error.email">Email is not valid</span>
+	                            <span id="errormessage4" style="display: none; color:red;">User cannot find</span>
+	                            <span id="errormessage5" style="display: none; color:green;">User deleted</span>
 	      				</div>
 	      			</form>
 	      		</div>
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        		<button type="button" ng-disabled="rusername.$invalid" class="btn btn-primary" id="retrievalUsername">Confirm Delete</button>
+	        		<button type="button" ng-disabled="delete.$invalid" class="btn btn-primary" id="delete">Confirm Delete</button>
 	      		</div>
 	    	</div>
 	  	</div>

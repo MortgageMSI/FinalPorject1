@@ -37,7 +37,7 @@ public class HelloService implements UserDetailsService {
 	public boolean deactivate(User1 user) throws NoSuchAlgorithmException{
 		String md5 = md5Converter.convert(user.getPassword());
 		user.setPassword(md5);
-		if(!hd.findByUsernamepassword(user.getUsername(), user.getPassword()))
+		if(!hd.findByUsernamepasswordemail(user.getUsername(), user.getPassword(),user.getEmail()))
 		{
 			//System.out.print("exist");
 			return false;
@@ -45,6 +45,22 @@ public class HelloService implements UserDetailsService {
 		else{
 			//System.out.print(user.getUsername());
 			User1 u = hd.findByUsername(user.getUsername());
+			u.setEnabled(0);
+			hd.update(u);
+			//System.out.println("changed");
+			return true;
+		}
+	}
+	
+	public boolean delete(User1 user) throws NoSuchAlgorithmException{
+		if(!hd.emailIsExist(user.getEmail()))
+		{
+			//System.out.print("exist");
+			return false;
+		}
+		else{
+			//System.out.print(user.getUsername());
+			User1 u = hd.findUserByEmail(user.getEmail());
 			u.setEnabled(0);
 			hd.update(u);
 			//System.out.println("changed");
@@ -122,8 +138,25 @@ public class HelloService implements UserDetailsService {
 		}
 	}
 	
+	public Boolean findUserByUsername(String username, String password) {
+		if(!hd.findByUsernamepassword(username, password))
+		{
+			//System.out.print("exist");
+			return false;
+		}
+		else
+		{
+		return true;
+		}
+	}
+	
+	
 	public User1 findUserByEmail(String email) {
 		return hd.findUserByEmail(email);
+	}
+	
+	public User1 findByName(String name) {
+		return hd.findByUsername(name);
 	}
 	
 	public UserInfo process(User1 user) {

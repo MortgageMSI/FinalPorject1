@@ -87,15 +87,12 @@ $(document).ready(function() {
 	}
 			
 	function validateEmail(){
-		// if invalid
 		if(!re.test(email.val())){
 			$("#errormessage1").hide();
 			flagEmail = false;
 			return false;
 		}
-		// if valid
 		else {
-			//if(!flagEmail){
 				$.ajax({
 					url: "checkEmailExist.html",
 					data: {
@@ -106,18 +103,11 @@ $(document).ready(function() {
 					timeout: 5000,
 					success: function(msg){
 						if(msg=="exist"){
-//							$("#emailErrorInfo").html("Email exists!");
-//							$("#emailErrorInfo").show();
-//							email.removeClass("correct");
-//							email.addClass("error");
 							$("#errormessage1").show();
 							flagEmail = false;
 							return false;
 						}
 						else{
-//							$("#emailErrorInfo").hide();
-//							email.removeClass("error");
-//							email.addClass("correct");
 							$("#errormessage1").hide();
 							flagEmail = true;
 							return true;
@@ -129,7 +119,6 @@ $(document).ready(function() {
 						return false;
 					}
 				});
-			//}
 			return true;
 		}
 	}

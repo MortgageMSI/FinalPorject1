@@ -13,6 +13,8 @@ function setMsgAndTitle(num){
 }
 
 $(document).ready(function(){
+	
+	var j_demail1 = $("#j_demail1");
 	var labels = $("label[class='input-small']");
 	labels.css('cursor', 'help');
 	// Calculate form validation
@@ -409,5 +411,82 @@ $(document).ready(function(){
 //		chart_month.draw(monthTable, options_month_chart);
 	      
 	}
+	
+	
+	
+	
+	
+	
+	// change password
+	var cpasswordBtn = $("#cpassword");
+	var cpasswordForm = $("#cpasswordForm");
+	cpasswordBtn.click(function(){
+		//if(!re.test($("#j_email").val())){
+		//	alert("Please input a valid email!");
+		//}
+		//else
+			cpasswordForm.submit();
+	});
+	
+	
+	// deactivate account
+	var deactivateBtn = $("#deactivate");
+	var deactivateForm = $("#deactivateForm");
+	deactivateBtn.click(function(){
+		//if(!re.test($("#j_email").val())){
+		//	alert("Please input a valid email!");
+		//}
+		//else
+			deactivateForm.submit();
+	});
+	
+	// delete account
+
+	var deleteBtn = $("#delete");
+	var deleteForm = $("#deleteForm");
+	deleteBtn.click(function(){
+		
+		if(validateEmail1()){
+			$("#errormessage4").hide();
+			$("#errormessage5").show();
+		}
+			else
+				{
+				$("#errormessage4").show();
+				$("#errormessage5").hide();
+				}
+	});
+	
+	
+	function validateEmail1(){
+				if($.ajax({
+					url: "delete.html",
+					data: {
+						j_demail1: j_demail1.val()
+					},
+					type: "get",
+					async: false,
+					timeout: 5000,
+					success: function(msg){
+						if(msg=="false"){
+							return false;
+						}
+						else{
+							return true;
+						}
+					},
+					error: function(){
+						alert("Not able to connect to server");
+						return false;
+					}
+				}))
+					return true;
+				else
+				return false;
+		
+		}
+	
+	
+	
 	
 });

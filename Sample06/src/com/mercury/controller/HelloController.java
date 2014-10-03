@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jettison.json.JSONArray;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
@@ -102,23 +104,25 @@ public class HelloController {
 		return "registererrorpage";
 	}
 	
-	@RequestMapping(value="/deactivate", method = RequestMethod.GET)
-	public ModelAndView deactivate() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("deactivate");
-		return mav;
-	}
+//	@RequestMapping(value="/deactivate", method = RequestMethod.GET)
+//	public ModelAndView deactivate() {	
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("deactivate");
+//		return mav;
+//	}
 	
 	@RequestMapping(value="/deactivate", method=RequestMethod.POST)
 	public ModelAndView deactivate(ModelMap model,
 			HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
-		String username = request.getParameter("j_username");
-		String password = request.getParameter("j_password");
+		String username = request.getParameter("j_dusername");
+		String password = request.getParameter("j_dpassword");
+		String email = request.getParameter("j_demail");
 		User1 user = new User1();
 		user.setUsername(username);
 		user.setPassword(password);
-		System.out.println(user.getUsername());
+		user.setEmail(email);
+		//System.out.println(user.getUsername());
 		if(hs.deactivate(user))
 		{	
 			//System.out.println("2");
@@ -133,6 +137,54 @@ public class HelloController {
 		}
 		return mav;
 	}
+	
+	
+	
+	///delete user
+	@RequestMapping(value="/delete")
+	@ResponseBody
+	public String delete(HttpServletRequest request) throws NoSuchAlgorithmException {
+		String email = request.getParameter("j_demail1");
+		System.out.println(email);
+		User1 user = new User1();
+		user.setEmail(email);
+		if(hs.delete(user))
+		{
+			return "true";
+		}
+			else
+			{
+				return "false";
+			}
+		//System.out.println(user.getUsername());
+
+	}
+	
+	
+	
+	
+//	@RequestMapping(value="/delete", method=RequestMethod.POST)
+//	public ModelAndView delete(ModelMap model,
+//			HttpServletRequest request) throws NoSuchAlgorithmException {
+//		ModelAndView mav = new ModelAndView();
+//		String email = request.getParameter("j_demail");
+//		User1 user = new User1();
+//		user.setEmail(email);
+//		//System.out.println(user.getUsername());
+//		if(hs.delete(user))
+//		{	
+//			//System.out.println("2");
+//			//javaMail jm = new javaMail(user.getFirstname(),user.getLastname(),user.getEmail(),user.getUsername());
+//			//jm.sendWelcomeEmail();
+//			mav.setViewName("main");
+//		}
+//		else{
+//			//System.out.println("3");
+//			mav.setViewName("systemmessage");
+//			mav.addObject("title", "Not able to find user");
+//		}
+//		return mav;
+//	}
 	
 //	@RequestMapping(value="/reactivate", method = RequestMethod.GET)
 //	public ModelAndView reactivate() {	
@@ -250,39 +302,29 @@ public class HelloController {
 		return mav;
 	}
 	
-	//change new password
-	@RequestMapping(value="/cpassword", method = RequestMethod.GET)
-	public ModelAndView cpassword() {	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("cpassword");
-		return mav;
-	}
 	
 	@RequestMapping(value="/cpassword", method=RequestMethod.POST)
 	public ModelAndView cpassword(ModelMap model,
 			HttpServletRequest request) throws NoSuchAlgorithmException {
 		ModelAndView mav = new ModelAndView();
-		String email = request.getParameter("j_email");
-		String username = request.getParameter("j_name");
-		String password = request.getParameter("j_opassword");
+		String opassword = request.getParameter("j_opassword");
 		String npassword = request.getParameter("j_npassword");
-		User1 user = new User1();
-		user.setEmail(email);
-		user.setUsername(username);
-		user.setPassword(md5Converter.convert(password));
-		//System.out.println(username);
-		//System.out.println(password);
-		if(hs.hasUserpassword(user))
-		{	
-			User1 u = hs.findUserByEmail(email);
+		opassword =  md5Converter.convert(opassword);
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(user.getUsername());
+		
+		if(hs.findUserByUsername(user.getUsername(), opassword))
+		{
+			
+			
+			User1 user1 = hs.findByName(user.getUsername());
 			String md5 = md5Converter.convert(npassword);
-			u.setPassword(md5);
-			hs.update(u);
+			user1.setPassword(md5);
+			hs.update(user1);
 			mav.setViewName("systemmessage");
 			mav.addObject("title", "New password set");
 		}
 		else{
-			//System.out.println("3");
 			mav.setViewName("systemmessage");
 			mav.addObject("title", "We cannot find a match in our database");
 		}

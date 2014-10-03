@@ -85,7 +85,10 @@ public class HelloDaoImpl implements HelloDao {
 		if ((template.findByCriteria(DetachedCriteria.forClass(User1.class).add(Restrictions.eq("username", username)).add(Restrictions.eq("password", password))).size()!=0)){
 			return true;
 		}
+		else
+		{
 		return false;
+		}
 	}
 	
 	@Override
