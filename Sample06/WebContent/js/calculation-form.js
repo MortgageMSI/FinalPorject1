@@ -142,23 +142,52 @@ $(document).ready(function(){
 	var expected_adjustment_error = $("#expected_adjustment_error");
 	var rate_gap = $("#rate_gap");
 	var rate_gap_error = $("#rate_gap_error");
+	var extra=$("#loan_extra");
+	var term=$("#loan_term");
 	
 	loan_amount.blur(validateAmount);
 	expected_adjustment.blur(validateExpectedAdjustment);
 	rate_gap.blur(validateRateGap);
+	extra.blur(validateExtra);
+	term.blur(validateTerm);
+	
+	function validateExtra(){
+		// if invalid
+		if(isNaN(extra.val())){
+			$("#errormessage12").show();
+		}
+		else if(extra.val()<20|| extra.val()>1000){
+			$("#errormessage11").show();
+		}
+		// if valid
+		else {
+			$("#errormessage11").hide();
+			$("#errormessage12").hide();
+		}
+	}
+	
+	function validateTerm(){
+		// if invalid
+		if(isNaN(term.val())){
+			$("#errormessage13").show();
+		}
+		else {
+			$("#errormessage13").hide();
+		}
+	}
 	
 	function validateAmount(){
 		if(isNaN(loan_amount.val())){
 			loan_amount_error.html("Numbers only for Loan Amount!");
 			loan_amount_error.show();
-			loan_amount.val("60000");
+			loan_amount.val("200000");
 			return false;
 		}
 		else{
-			if(loan_amount.val()<60000 || loan_amount.val()>300000){
-				loan_amount_error.html("Loan amount range: 60,000 to 300,000");
+			if(loan_amount.val()<50000 || loan_amount.val()>500000){
+				loan_amount_error.html("Loan amount range: 50,000 to 500,000");
 				loan_amount_error.show();
-				loan_amount.val("60000");
+				loan_amount.val("200000");
 				return false;
 			}
 			else{
@@ -167,6 +196,7 @@ $(document).ready(function(){
 			}
 		}
 	}
+	
 	
 	function validateExpectedAdjustment(){
 		if(isNaN(expected_adjustment.val())){
@@ -507,8 +537,4 @@ $(document).ready(function(){
 					return st;
 				}
 		}
-	
-	
-	
-	
 });

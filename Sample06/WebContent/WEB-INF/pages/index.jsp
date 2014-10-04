@@ -348,6 +348,13 @@ Back to top button
 	        					</tr>
 	        				</table>
 	        			</div>
+	        			
+	        			<span id="errormessage11" style="display: none; color:red;">Extra should between 20 and 1000 dollars</span>
+	        			<span id="errormessage12" style="display: none; color:red;">Numbers only</span>
+	        			<span id="errormessage13" style="display: none; color:red;">Numbers only</span>
+	        			<span id="errormessage14" style="display: none; color:red;">Numbers only</span>
+	        			<span id="errormessage15" style="display: none; color:red;">Input between 50,000 and 500,000</span>
+	        			
         		        <div class="footer">
         		        	<p id="loan_amount_error" class="error" style="display: none;"></p>
         		        	<p id="expected_adjustment_error" class="error" style="display: none;"></p>
