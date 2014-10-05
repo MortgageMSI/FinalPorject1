@@ -171,6 +171,12 @@ public class HelloService implements UserDetailsService {
 		return hd.getRate(rid);
 	}
 	
+	public void changeRate(int term, double frate){
+		Rate findrate= getRate(term);
+		findrate.setRate(frate);
+		hd.updateRate(findrate);
+	}
+	
 	public boolean checkUsernameValidation(String username){
 		return hd.nameIsExist(username);
 	}

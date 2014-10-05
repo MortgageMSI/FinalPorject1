@@ -418,6 +418,26 @@ public class HelloController {
 			return "no";
 	}
 	
+	@RequestMapping(value="/crate")
+	@ResponseBody
+	public String crate(HttpServletRequest request){
+		int cterm = Integer.parseInt(request.getParameter("cterm"));
+		Rate rate1 = hs.getRate(cterm);
+		//System.out.println(rate1.getRate());
+		return Double.toString(rate1.getRate());
+	}
+	
+	@RequestMapping(value="/crate1")
+	@ResponseBody
+	public String crate1(HttpServletRequest request){
+		double crate = Double.parseDouble(request.getParameter("crate1"));
+		System.out.println(crate);
+		int t=Integer.parseInt(request.getParameter("cterm1"));
+		System.out.println(t);
+		hs.changeRate(t, crate);
+		//System.out.println(rate1.getRate());
+		return "abc";
+	}
 	
 	
 	

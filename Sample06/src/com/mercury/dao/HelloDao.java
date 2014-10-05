@@ -20,4 +20,5 @@ public interface HelloDao {
 	public User1 findUserByEmail(String email);
 	public Boolean findByAll(String username, String firstname, String lastname, String email);
 	public Rate getRate(int rid);
+	public void updateRate(Rate rate);
 }

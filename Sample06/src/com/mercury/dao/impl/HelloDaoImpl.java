@@ -72,6 +72,12 @@ public class HelloDaoImpl implements HelloDao {
 		// TODO Auto-generated method stub
 		template.update(user);
 	}
+	
+	@Override
+	public void updateRate(Rate rate) {
+		// TODO Auto-generated method stub
+		template.update(rate);
+	}
 
 	@Override
 	public void delete(User1 user) {

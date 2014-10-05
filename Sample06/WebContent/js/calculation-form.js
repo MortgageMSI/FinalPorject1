@@ -15,6 +15,28 @@ function setMsgAndTitle(num){
 $(document).ready(function(){
 	var j_cnpassword1=$("#j_cnpassword");
 	var j_npassword1=$("#j_npassword");
+	var cterm=$("#cterm");
+	changerate1();
+	function changerate1(){
+
+			$.ajax({
+				url: "crate.html",
+				data: {
+					cterm: 15
+				},
+				type: "post",
+				async: false,
+				timeout: 5000,
+				success: function makerate(data){
+					showrate(data);
+				}
+				}
+			);
+	}
+
+	
+	
+	
 	j_cnpassword1.blur(validateConfirmPassword);
 	
 	function validateConfirmPassword(){
@@ -70,6 +92,32 @@ $(document).ready(function(){
     });
 	
 	
+	var rate=$("#j_crate");
+	var cterm=$("#cterm");
+	cterm.change(function(){
+		$("#errormessage21").hide();
+			changerate();       
+    });	
+	function changerate(){
+
+			$.ajax({
+				url: "crate.html",
+				data: {
+					cterm: cterm.val()
+				},
+				type: "post",
+				async: false,
+				timeout: 5000,
+				success: function makerate(data){
+					showrate(data);
+				}
+				}
+			);
+	}
+	function showrate(data){
+		$("#j_crate").val(data);
+	}
+		
 	
 	
 //	type1.click(function(){
@@ -541,4 +589,45 @@ $(document).ready(function(){
 					return st;
 				}
 		}
+	
+	
+	
+	
+	
+	
+	
+	var changerateBtn = $("#changerate");
+	var changerateForm = $("#changerateForm");
+	changerateBtn.click(function(){
+//		changerateForm.submit();
+			$.ajax({
+				url: "crate1.html",
+				data: {
+					crate1: $("#j_crate").val(),
+					cterm1: $("#cterm").val()
+				},
+				type: "get",
+				async: false,
+				timeout: 5000,
+				success: function dodata(data){
+					if(data=="abc")
+					$("#errormessage21").show();
+				},
+				error: function(){
+					alert("Not able to connect to server");
+				}
+			});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 });

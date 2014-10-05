@@ -131,6 +131,7 @@ Back to top button
 							<li><a href="#" data-toggle="modal" data-target="#myModal1">Change Password</a></li>
 							<li><a href="#" data-toggle="modal" data-target="#myModal2">Deactivate Account</a></li>
 							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a href="#" data-toggle="modal" data-target="#myModal3">Delete User</a></li>
+							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a href="#" data-toggle="modal" data-target="#myModal4">Change Rate</a></li>
 							<li class="divider"></li>
 							<li><a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
 							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a class="btn btn-black">${userrole}</a></li>
@@ -272,6 +273,39 @@ Back to top button
 	      		<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        		<button type="button" ng-disabled="delete.$invalid" class="btn btn-primary" id="delete">Confirm Delete</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+	
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        		<h4 class="modal-title" id="myModalLabel">Change Rate</h4>
+	      		</div>
+	      		<div class="modal-body">
+	      			<form action="changerate.html" name="changerate" method="post" id="changerateForm" class="form">
+	      				<div class="body">
+	      					<!-- Rate -->
+	      					<label>Term</label>
+	      					 <select id="cterm" name="cterm" class="selectpicker input-medium" data-style="btn-info">
+        		        		<option value="15">15 Years</option>
+        		        		<option value="20">20 Years</option>
+        		        		<option value="30">30 Years</option>
+        		        	</select>
+        		        	<br />
+        		        	<label>Rate</label>
+        		        	<input type="number" min="0.000" max="100.000" step="0.001" name="j_crate" id="j_crate" class="input-huge"/>
+	      					<br />
+	                            <span id="errormessage21" style="display: none; color:green;">Changed</span>
+	      				</div>
+	      			</form>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-primary" id="changerate">Change rate</button>
 	      		</div>
 	    	</div>
 	  	</div>
