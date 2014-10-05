@@ -6,6 +6,7 @@ import java.util.Random;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.springframework.cache.annotation.Cacheable;
 
 public class MCalculator {
 	//in put arm yearly rate say 4.2, return monthly rate between 0.00308 and 0.00392
@@ -36,7 +37,9 @@ public class MCalculator {
 	}
 	
 	//ARMCycle means arm years, negative value means prepaid month with extraMonthly dollars put in
+	@Cacheable("getPayment")
 	public JSONArray calculator(int principle,double APR,int term,int ARMCycle,int extraMonthly) throws JSONException{
+		System.out.println("did it");
 		//initialize
 		int total=0;
 		int remaining= principle;
@@ -101,7 +104,7 @@ public class MCalculator {
 		JSONObject j = new JSONObject();
 		jsonWrapper.put(j.put("standardTotal", standardTotal));
 		jsonWrapper.put(json);
-		System.out.println("this: "+jsonWrapper.toString());
+		//System.out.println("this: "+jsonWrapper.toString());
 		return jsonWrapper;
 		/*System.out.println("principle: "+principle+" years: "+term/12+" ARMyear: "+ARMCycle/12+" total is "+total);
 		System.out.println("total interest paid "+(total-principle)+" over "+term/12+" years");

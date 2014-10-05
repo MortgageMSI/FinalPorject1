@@ -1,5 +1,6 @@
 var popupMsg;
 var popupTitle;
+var a="";
 var msgs = new Array("The total amount paid by a buyer to a seller for the purchase of property.", 
 		"The amount of cash you pay toward the purchase of your home to make up the difference between the purchase price and your mortgage loan. Down payments often range between 5% and 20% of the sales price depending on many factors, including your loan, your lender, your credit history, and so forth.",
 		"The period of time during which a loan must be repaid. For example, a 30-year fixed loan has a term of 30 years. Also called term. See also: maturity date.",
@@ -202,48 +203,60 @@ $(document).ready(function(){
 	function validateExtra(){
 		// if invalid
 		if(isNaN(extra.val())){
-			$("#errormessage12").show();
+			$("#errormessage34").show();
+			$("#errormessage33").hide();
+			return false;
 		}
-		else if(extra.val()<20|| extra.val()>1000){
-			$("#errormessage11").show();
+		else if((extra.val()<20 &&extra.val()!=0)|| extra.val()>1000){
+			$("#errormessage33").show();
+			$("#errormessage34").hide();
+			return false;
 		}
 		// if valid
 		else {
-			$("#errormessage11").hide();
-			$("#errormessage12").hide();
+			$("#errormessage33").hide();
+			$("#errormessage33").hide();
+			return true;
 		}
 	}
 	
 	function validateTerm(){
 		// if invalid
 		if(isNaN(term.val())){
-			$("#errormessage13").show();
+			$("#errormessage35").show();
+			$("#errormessage36").hide();
+			return false;
 		}
+		else if(term.val() >loanTerm.val()*12)
+			{
+			$("#errormessage36").show();
+			$("#errormessage35").hide();
+			return false;
+			}
 		else {
-			$("#errormessage13").hide();
+			$("#errormessage36").hide();
+			$("#errormessage35").hide();
+			return true;
 		}
 	}
 	
 	function validateAmount(){
 		if(isNaN(loan_amount.val())){
-			loan_amount_error.html("Numbers only for Loan Amount!");
-			loan_amount_error.show();
-			loan_amount.val("200000");
+			$("#errormessage31").show();
+			$("#errormessage32").hide();
 			return false;
 		}
-		else{
-			if(loan_amount.val()<50000 || loan_amount.val()>500000){
-				loan_amount_error.html("Loan amount range: 50,000 to 500,000");
-				loan_amount_error.show();
-				loan_amount.val("200000");
+		else if(loan_amount.val()<50000 || loan_amount.val()>500000){
+				$("#errormessage32").show();
+				$("#errormessage31").hide();
 				return false;
-			}
-			else{
-				loan_amount_error.hide();
+		}
+		else {
+				$("#errormessage32").hide();
+				$("#errormessage31").hide();
 				return true;
 			}
 		}
-	}
 	
 	
 	function validateExpectedAdjustment(){
@@ -289,6 +302,7 @@ $(document).ready(function(){
 	}
 	
 	$("#calculate").click(function(){
+		if( validateAmount() && validateExtra() && validateTerm()){
 		//if( validateAmount() && validateExpectedAdjustment() && validateRateGap() ){
 			//if( !type1.is(":checked") && !type2.is(":checked") && !type3.is(":checked")){
 			//	expected_adjustment.val("0");
@@ -338,7 +352,7 @@ $(document).ready(function(){
 				}
 			});
 
-	});
+		}});
 	
 	//collapsible menu
 	$('#tabFAQ a').click(function(e) {
@@ -480,8 +494,20 @@ $(document).ready(function(){
 		var ms = returnData;
 		//alert("Fixed rate total is: "+ms[0].standardTotal);
 		//alert("Fixed rate total interest paid: "+ms[1][count-1].accumulateInterest+" during "+count+" months.");
-		alert("Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you saved "+(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple));
-		
+		//alert("Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you saved "+(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple));		
+		if((ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple)==0)
+			$("#abc").hide();
+		else if ((ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple)>0)
+			{
+		document.getElementById("errormessage40").innerHTML =  "Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you saved "+(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple);
+		$("#abc").show();
+			}
+		else
+			{
+			document.getElementById("errormessage40").innerHTML =  "Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you need to pay "+(-(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple))+" more";
+			$("#abc").show();
+			}
+
 		var i=0;		
 		for(; ms[1][i]!=null; i++){			
 			monthTable.setCell(i,0,ms[1][i].month);

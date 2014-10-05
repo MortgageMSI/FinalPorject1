@@ -8,36 +8,14 @@
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd">
 	<cache:annotation-driven />
-	<bean id="mc" class="com.jason.algorithms.mc.MortgageCalculator"/>
+	
 	
 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">  
 		<property name="caches">  
     		<set>  
       			<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" p:name="default"/>  
       			<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" p:name="getPayment"/>  
-      			<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" p:name="equation"/>  
-      			<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" p:name="getRemain"/> 
     		</set>  
   		</property>  
 	</bean> 
 </beans>
-<!--
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:aop="http://www.springframework.org/schema/aop"
-      xsi:schemaLocation="
-			http://www.springframework.org/schema/beans 
-			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-			http://www.springframework.org/schema/aop 
-			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-	<bean id="userAdvice" class="com.jason.aspects.UserAdvice"/>
-	
-	<aop:config>
-		<aop:aspect id="userAspect" ref="userAdvice">
-			<aop:before method="start" pointcut="execution(* com.jason.services.UserActionService.changePassword(String, String)) and args(username, newPassword)"/>
-			<aop:around method="around" pointcut="execution(* com.jason.services.UserActionService.changePassword(String, String)) and args(username, newPassword)"/>
-		</aop:aspect>
-	</aop:config>
-</beans>
--->

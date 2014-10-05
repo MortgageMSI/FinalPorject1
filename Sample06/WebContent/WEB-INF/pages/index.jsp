@@ -382,12 +382,13 @@ Back to top button
 	        					</tr>
 	        				</table>
 	        			</div>
+	        			<span id="errormessage31" style="display: none; color:red;">Please input a valid principle amount</span>
+	        			<span id="errormessage32" style="display: none; color:red;">Input must between 50,000 and 500,000</span>
+	        			<span id="errormessage33" style="display: none; color:red;">Extra must between 20 and 1000 dollars</span>
+	        			<span id="errormessage34" style="display: none; color:red;">Please input a valid extra amount</span>
+	        			<span id="errormessage35" style="display: none; color:red;">Please input a valid extra term</span>
+	        			<span id="errormessage36" style="display: none; color:red;">Extra Term should be smaller than loan term</span>
 	        			
-	        			<span id="errormessage11" style="display: none; color:red;">Extra should between 20 and 1000 dollars</span>
-	        			<span id="errormessage12" style="display: none; color:red;">Numbers only</span>
-	        			<span id="errormessage13" style="display: none; color:red;">Numbers only</span>
-	        			<span id="errormessage14" style="display: none; color:red;">Numbers only</span>
-	        			<span id="errormessage15" style="display: none; color:red;">Input between 50,000 and 500,000</span>
 	        			
         		        <div class="footer">
         		        	<p id="loan_amount_error" class="error" style="display: none;"></p>
@@ -399,6 +400,9 @@ Back to top button
 	        		</form>
 	        	</div>
 			<!-- End of Add Stock Form -->
+		</div>
+		<div class="jumbotron" id="abc" style="display: none">
+			<span id="errormessage40" style="color:green;"></span>
 		</div>
 		<div class="jumbotron">
 			<!-- Show Stock Information -->
@@ -462,7 +466,7 @@ Back to top button
     <script type="text/javascript">
     	$(document).ready(function(){
     		if ("<c:out value='${param.login_error}'/>" != "") {
-			  	alert("Login failed. Please check your username and password.");
+			  	alert("Login failed. Please enter correct username and password");
 			}
     	});
     </script>
