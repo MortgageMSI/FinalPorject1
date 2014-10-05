@@ -42,11 +42,14 @@ public class MCalculator {
 		int remaining= principle;
 		double baseMonthRate=APR/1200;
 		int monthlyPayment=getMonthlyPayment(principle,baseMonthRate,term);
+		int standardTotal =monthlyPayment*term;
 		System.out.println(monthlyPayment);
 		int mp1=0,mp2=0;  
 		JSONArray json = new JSONArray();
+		int accumulateInterest =0;
+		int accumulatePrinciple =0;
 		
-		//for prepaid& extra money case
+		//for prepaid & extra money case
 		if(ARMCycle<0 && extraMonthly>0){
 			mp1 = monthlyPayment;
 			mp2=monthlyPayment+extraMonthly;
@@ -68,6 +71,9 @@ public class MCalculator {
 			int interest =(int)Math.round(remaining*baseMonthRate);
 			int monthlyPrincipal = monthlyPayment- interest;
 			remaining= remaining-monthlyPrincipal;
+			accumulateInterest +=interest;
+			accumulatePrinciple +=monthlyPrincipal;
+			
 			JSONObject obj = new JSONObject();
 			if(i==term || remaining<=0){
 				System.out.println(i+"	"+(monthlyPayment+remaining)+"	"+(monthlyPayment+remaining-interest)+"	"+interest+"	"+0);
@@ -76,6 +82,8 @@ public class MCalculator {
 				obj.put("principle", monthlyPayment+remaining-interest);
 				obj.put("interest", interest);
 				obj.put("remaining", 0);
+				obj.put("accumulateInterest", accumulateInterest-remaining);
+				obj.put("accumulatePrinciple", accumulatePrinciple+remaining);
 			}
 			else{
 				System.out.println(i+"	"+monthlyPayment+"	"+monthlyPrincipal+"	"+interest+"	"+remaining);
@@ -84,14 +92,26 @@ public class MCalculator {
 				obj.put("principle", monthlyPrincipal);
 				obj.put("interest", interest);
 				obj.put("remaining", remaining);
+				obj.put("accumulateInterest", accumulateInterest);
+				obj.put("accumulatePrinciple", accumulatePrinciple);
 			}	
 			json.put(obj);
 		}
-		System.out.println("principle: "+principle+" years: "+term/12+" ARMyear: "+ARMCycle/12+" total is "+total);
+		JSONArray jsonWrapper  = new JSONArray();
+		JSONObject j = new JSONObject();
+		jsonWrapper.put(j.put("standardTotal", standardTotal));
+		jsonWrapper.put(json);
+		System.out.println("this: "+jsonWrapper.toString());
+		return jsonWrapper;
+		/*System.out.println("principle: "+principle+" years: "+term/12+" ARMyear: "+ARMCycle/12+" total is "+total);
 		System.out.println("total interest paid "+(total-principle)+" over "+term/12+" years");
 		//Summary sum=new Summary(principle, APR, term, ARMCycle,extraMonthly, total, total-principle);
 		System.out.println(json.length());
-		return json;
+		return json;*/
 	}
+	/*public static void main(String[] args) throws JSONException {
+		MCalculator c = new MCalculator();
+			System.out.println(c.calculator(240000, 3.647, 180, 200, 24).toString());
+	}*/
 	
 }

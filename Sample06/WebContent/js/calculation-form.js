@@ -421,7 +421,7 @@ $(document).ready(function(){
 		
 		//////////////////
 		
-		for(var count = 0;returnData[count]!=null;count++);
+		for(var count = 0;returnData[1][count]!=null;count++);
 		var monthTable = new google.visualization.DataTable();
 		monthTable.addColumn('number','Month');
 		monthTable.addColumn('number','Payment');
@@ -429,14 +429,18 @@ $(document).ready(function(){
 		monthTable.addColumn('number','Monthly Interest');
 		monthTable.addColumn('number','Remain');
 		monthTable.addRows(count);		
-		var ms = returnData;		
+		var ms = returnData;
+		//alert("Fixed rate total is: "+ms[0].standardTotal);
+		//alert("Fixed rate total interest paid: "+ms[1][count-1].accumulateInterest+" during "+count+" months.");
+		alert("Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you saved "+(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple));
+		
 		var i=0;		
-		for(; ms[i]!=null; i++){			
-			monthTable.setCell(i,0,ms[i].month);
-			monthTable.setCell(i,1,ms[i].payment);
-			monthTable.setCell(i,2,ms[i].principle);
-			monthTable.setCell(i,3,ms[i].interest);
-			monthTable.setCell(i,4,ms[i].remaining);
+		for(; ms[1][i]!=null; i++){			
+			monthTable.setCell(i,0,ms[1][i].month);
+			monthTable.setCell(i,1,ms[1][i].payment);
+			monthTable.setCell(i,2,ms[1][i].principle);
+			monthTable.setCell(i,3,ms[1][i].interest);
+			monthTable.setCell(i,4,ms[1][i].remaining);
 
 	
 		}
