@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jettison.json.JSONArray;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -352,7 +353,9 @@ public class HelloController {
 	
 	@RequestMapping(value="/calculate", method=RequestMethod.POST)
 	@ResponseBody
+	@Cacheable("getPayment")
 	public String getInput1(HttpServletRequest request) throws Exception{
+		//Thread.sleep(5000);
 		int loan_amount = Integer.parseInt(request.getParameter("loan_amount"));
 		double down_payment = Double.parseDouble(request.getParameter("down_payment"));
 		int loan_term = Integer.parseInt(request.getParameter("loanTerm"));
@@ -390,6 +393,7 @@ public class HelloController {
 	    	   System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	    	   System.out.println(loan+" "+apr+" "+loan_term*12+" "+loan_early+" "+loan_extra1);
 	    	   JSONArray json=c.calculator(loan,apr, loan_term*12,loan_early,loan_extra1);
+
 	    	   
 	    	   //String abc = "{\"firstone\":"+json.toString()+"}";
 	    	   System.out.println(json.toString());
