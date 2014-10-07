@@ -405,6 +405,8 @@ Back to top button
 			<span id="errormessage40" style="color:green;"></span>
 		</div>
 		<div class="jumbotron">
+		<div id="pie_chart_div"></div>
+		<div id="chart_div" style="width: 900px; height: 500px;"></div>
 			<!-- Show Stock Information -->
 			<h3>Show Result</h3>
 			<div class="wrapper"><!-- id="register-wraper" -->

@@ -521,6 +521,58 @@ $(document).ready(function(){
 
 		var table_month = new google.visualization.Table(document.getElementById('monthly_table'));
 		table_month.draw(monthTable, {showRowNumber: true, page: 'enable', pageSize: 600});
+		
+		
+		
+		//set pie chart
+		var totalTable = new google.visualization.DataTable();
+		totalTable.addColumn('string', 'Type');
+		totalTable.addColumn('number', 'Amount');
+		totalTable.addRows(2);
+		totalTable.addRows([
+		              ['Principle: $'+ms[1][count-1].accumulatePrinciple, ms[1][count-1].accumulatePrinciple],
+		              ['Interest:  $'+ms[1][count-1].accumulateInterest, ms[1][count-1].accumulateInterest]
+		            ]);
+		
+		
+		var legend = {
+				position: 'left', 
+				textStyle: {color: 'blue', fontSize: 16}
+		};
+		var options_pie_total = {
+			legend: legend,
+			is3D: true,
+			pieStartAngle:15
+		};
+		
+		var pie_total = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+		pie_total.draw(totalTable,options_pie_total);
+		
+		
+		//line chart
+		var data = new google.visualization.DataTable();
+		data.addColumn('number', 'month');
+		data.addColumn('number', 'Principle');
+		data.addColumn('number', 'Interest');
+		data.addColumn('number', 'Remaining');
+		data.addRows(count);
+		
+		var i=0;		
+		for(; ms[1][i]!=null; i++){	
+		              	
+			data.setCell(i, 0, ms[1][i].month);
+			data.setCell(i, 1, ms[1][i].accumulatePrinciple);
+			data.setCell(i, 2, ms[1][i].accumulateInterest);
+			data.setCell(i, 3, ms[1][i].remaining);
+		}
+
+
+		var options = {
+		      title: 'Amortization'
+		};
+
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
 
 //		var options_month_chart = {
 //			title: "Monthly Schedule",
