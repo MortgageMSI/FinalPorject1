@@ -5,18 +5,51 @@
 <html ng-app>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<!-- Styles -->
-	<!-- 
-    <link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet"/>
-     -->
-    <link rel="icon" href="<c:url value='/images/icon.ico'/>" type="icon" />
+	
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
     
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<link href="<c:url value='/css/typica-login.css'/>" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href="<c:url value='/bootstrap-3.1.1-dist/css/bootstrap-responsive.min.css'/>" rel="stylesheet"/>
     
-    
+    <title>Mortgage Calculator</title>
+
+<style>
+html,body {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#background-carousel {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+.carousel,.carousel-inner {
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.item {
+	width: 100%;
+	height: 100%;
+	background-position: center center;
+	background-size: cover;
+	z-index: 0;
+}
+
+#content-wrapper {
+	position: absolute;
+	z-index: 1 !important;
+	min-width: 100%;
+	min-height: 100%;
+}
+</style>
     
 </head>
 <body>
@@ -44,11 +77,10 @@
 						<span class="glyphicon glyphicon-user"></span>
 						Sign-In
 					</button>
-					<!-- 
-					<a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">Forget Password?</a>
 					
-					<button type="submit" class="btn btn-default" data-toggle="modal" data-target="#myModal1">Register</button>
-					-->
+					<label style="color: #FFFFFF;"><input type="checkbox" name="_spring_security_remember_me" class="checkbox" checked="checked"/>	
+	                Remember Me</label>	
+					
 					<button class="btn btn-default dropdown-toggle" type="button" 
 					id="dropdown1" data-toggle="dropdown">
 						Account
@@ -60,31 +92,78 @@
 							<li class="divider"></li>
 							<li><a href="#" data-toggle="modal" data-target="#myModal4">Register</a></li>
 						</ul>
-					<label style="color: #FFFFFF;"><input type="checkbox" name="_spring_security_remember_me" class="checkbox" checked="checked"/>	
-	                Remember Me</label>			                                        
+							                                        
 				</form>
 			</div>
 		</div>
 	</nav>
 
-	<div>
-		<span style="display: block !important; width: 290px; text-align: center; font-family: sans-serif; font-size: 15px;">
-		<a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:08540.1.99999&bannertypeclick=wu_bluestripes" title="Princeton, New Jersey Weather Forecast" 
-		target="_blank">
-		<img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_bluestripes&airportcode=KTTN&ForcedCity=Princeton&ForcedState=NJ&zip=08540&language=EN" 
-		alt="Find more about Weather in Princeton, NJ" width="200" /></a>
-		<br>
-		<!-- 
-		<a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:08540.1.99999&bannertypeclick=wu_bluestripes" 
-		title="Get latest Weather Forecast updates" 
-		style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a></span>
-		 -->
+
+
+
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+
+			<div class="item active">
+				<img src="house1.jpg">
+				<div class="carousel-caption">
+					<h1>Online Fast Mortgage Calculator</h1>
+					<br />
+					<p style="font-size: large;">Easy to use, easy to register, clean UI design</p>
+					<p style="font-size: large;">Fast calculation, versatile input options</p>
+					<p style="font-size: large;">Why wait? Register and join us!</p>
+				</div>
+			</div>
+			<!-- End Item -->
+
+			<div class="item">
+				<img src="house2.jpg">
+				<div class="carousel-caption">
+					<h1>Calculatrice de crédits en ligne rapide</h1>
+					<br />
+					<p style="font-size: large;">Facile à utiliser, facile à enregistrer , la conception de l'interface utilisateur propre</p>
+					<p style="font-size: large;">Calcul rapide , des options polyvalentes d'entrée</p>
+					<p style="font-size: large;">Pourquoi attendre ? Inscrivez-vous et rejoignez-nous!</p>
+				</div>
+			</div>
+			<!-- End Item -->
+
+			<div class="item">
+				<img src="house3.jpg">
+				<div class="carousel-caption">
+					<h1>Schnelle Online- Hypothekenrechner</h1>
+					<br />
+					<p style="font-size: large;">Einfach zu bedienen , einfach zu registrieren , saubere UI-Design</p>
+					<p style="font-size: large;">Schnelle Berechnung , vielseitigen Eingabemöglichkeiten</p>
+					<p style="font-size: large;">Warum warten? Registrieren Sie sich und machen Sie mit!</p>
+				</div>
+			</div>
+			<!-- End Item -->
+
+		</div>
+		<!-- End Carousel Inner -->
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a> <a class="right carousel-control" href="#myCarousel"
+			data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right"></span>
+		</a>
 	</div>
-	
-	
-	
-	
-	
+	<!-- End Carousel -->
+
+
+
 	<!-- Modal -->
 	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -248,8 +327,8 @@
 							<div class="col-md-5">
 								<input type="text" name="j_username3" ng-model="user.username3" ng-minlength="3" ng-maxlength="10" required id="j_username3" class="input-huge"/>															<br />
 							<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.required">Username is required</span>
-        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.minlength">Username should have length of 3-10</span>
-        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.maxlength">Username should have length of 3-10</span>
+        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.minlength">Username should have length of 3-8</span>
+        		        	<span style="color:red" ng-show="signup.j_username3.$dirty && signup.j_username3.$error.maxlength">Username should have length of 3-8</span>
         		        	<span id="errormessage" style="display: none; color:red;">Username already exists</span>
 							</div>
 						</div>
@@ -325,7 +404,13 @@
 	  	</div>
 	</div>
 	
-	
+	<script>
+$(document).ready(function() {
+	$('#myCarousel').carousel({
+		pause: 'none'
+	})
+});
+</script>
 	<!-- 
     <footer class="white navbar-fixed-bottom">
       Don't have an account yet?  <a href="goRegister.html" class="btn btn-black">Register</a>
@@ -345,7 +430,6 @@
     </script>
     <script src="<c:url value='/js/formValidation.js'/>"></script>
     <script src="<c:url value='/bootstrap-3.1.1-dist/js/bootstrap.min.js'/>"></script>
-    <script src="<c:url value='/js/backstretch.min.js'/>"></script>
-    <script src="<c:url value='/js/typica-login.js'/>"></script>
+
 </body>
 </html>

@@ -133,8 +133,8 @@ Back to top button
 							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a href="#" data-toggle="modal" data-target="#myModal3">Delete User</a></li>
 							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a href="#" data-toggle="modal" data-target="#myModal4">Change Rate</a></li>
 							<li class="divider"></li>
-							<li><a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
-							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a class="btn btn-black">${userrole}</a></li>
+							<li><a class="btn btn-black" href="<c:url value="/j_spring_security_logout" />"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+							<li ng-show="'${userrole}'=='ROLE_ADMIN'"><a class="btn btn-red" style="color: #FF0000;">ADMIN</a></li>
 						</ul>
 				</form>
 			</div>
@@ -324,7 +324,7 @@ Back to top button
 	        					
 	        					<tr>
 	        					<!-- class="span2" -->
-	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Loan Amount</label></td>
+	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(0);">Principle</label></td>
 	        						<td><input id="loan_amount" name="loan_amount" class="input-small" type="text"/></td>
 	        						<td><label class="input-small" onclick="testMessageBox(event);" onmouseover="setMsgAndTitle(1);">Down Pay</label></td>
         		        			<td>
@@ -394,7 +394,7 @@ Back to top button
         		        	<p id="loan_amount_error" class="error" style="display: none;"></p>
         		        	<p id="expected_adjustment_error" class="error" style="display: none;"></p>
         		        	<p id="rate_gap_error" class="error" style="display: none;"></p>
-        		        	<a class="btn btn-danger" href="main.html">Reset</a>
+        		        	<a class="btn btn-default" href="main.html">Reset</a>
         		            <a class="btn btn-success" id="calculate">Calculate</a>
         		        </div>
 	        		</form>
@@ -404,46 +404,29 @@ Back to top button
 		<div class="jumbotron" id="abc" style="display: none">
 			<span id="errormessage40" style="color:green;"></span>
 		</div>
-		<div class="jumbotron">
-		<div id="pie_chart_div"></div>
-		<div id="chart_div" style="width: 900px; height: 500px;"></div>
+		<div class="jumbotron" style="background: #FFFFFF">
+		
 			<!-- Show Stock Information -->
 			<h3>Show Result</h3>
 			<div class="wrapper"><!-- id="register-wraper" -->
         		<section id="accordion">
-        			<a href="#_" class="expandcollapse btn btn-mini btn-primary pull-right" state="0">+ Expand All</a>
         			<ul class="nav nav-tabs" id="tabFAQ">
-        				<li class="active"><a href="#GQ" data-toggle="tab" state="0">Detailed Results</a></li>
+        				<li class="divider"></li>
     				</ul>
     				<div class="tab-content" id="faqContent">
       					<div class="tab-pane active" id="GQ">
         					<div class="accordion" id="generalQuestions">					
-          						<div class="accordion-group">
-            						<div class="accordion-heading clearfix">          
-                						<a class="accordion-toggle category pull-left" data-toggle="collapse" data-parent="#parent" href="#category1">Total Payment</a>
-										<div data-toggle="collapse" data-parent="#parent" href="#category1" class="head-height">&nbsp;</div>
-            						</div><!--/accordion-heading-->
-						            <div id="category1" class="accordion-body collapse">
-						              	<div id="total_pie" class="insideDiv"></div>
-						            </div><!--/Apparel End-->
-          						</div>
-					          	<div class="accordion-group">
-					            	<div class="accordion-heading clearfix">				                	
-					                	<a class="accordion-toggle category pull-left" data-toggle="collapse" data-parent="#parent" href="#category2">Annual Schedule</a>
-					                	<div data-toggle="collapse" data-parent="#parent" href="#category2" class="head-height">&nbsp;</div>
-					                </div><!--/accordion-heading-->
-					             	<div id="category2" class="accordion-body collapse">
-					             		<div id="annual_table" class="insideDiv"></div>		              					           
-					            	</div>
-					          	</div>
+          						
 					          	<div class="accordion-group">
 					          		<div class="accordion-heading clearfix">
-					                	<a class="accordion-toggle category pull-left" data-toggle="collapse" data-parent="#parent" href="#category3">Monthly Schedule</a>
+					                	<a class="accordion-toggle category pull-left" data-toggle="collapse" data-parent="#parent" href="#category3">Expand</a>
 					                	<div data-toggle="collapse" data-parent="#parent" href="#category3" class="head-height">&nbsp;</div>
 					                </div><!--/accordion-heading-->
 					             	<div id="category3" class="accordion-body collapse">
+					             	<div class="table-responsive">
 					             		<div id="monthly_table" class="insideDiv"></div>
 					             		<div id="monthly_chart" class="insideDiv"></div>
+					             	</div>
 					            	</div>
 					          	</div>
         					</div>
@@ -451,8 +434,10 @@ Back to top button
     				</div>
 				</section>
         	</div>
-        	
-        	
+        	<div class="table-responsive">
+        	<div id="pie_chart_div"></div>
+			<div id="chart_div" style="width: 900px; height: 300px;"></div>
+        	</div>
 		</div>
 		
 		

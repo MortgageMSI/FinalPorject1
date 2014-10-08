@@ -499,12 +499,12 @@ $(document).ready(function(){
 			$("#abc").hide();
 		else if ((ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple)>0)
 			{
-		document.getElementById("errormessage40").innerHTML =  "Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you saved "+(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple);
+		document.getElementById("errormessage40").innerHTML =  "Borrowed $"+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid $"+parseInt(ms[1][count-1].accumulateInterest)+" as interest, and total price is $"+(parseInt(ms[1][count-1].accumulatePrinciple)+parseInt(ms[1][count-1].accumulateInterest))+". Compares to fixed rate, you saved $"+(parseInt(ms[0].standardTotal)-parseInt(ms[1][count-1].accumulateInterest)-parseInt(ms[1][count-1].accumulatePrinciple));
 		$("#abc").show();
 			}
 		else
 			{
-			document.getElementById("errormessage40").innerHTML =  "Borrowed "+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid "+ms[1][count-1].accumulateInterest+" as interest, and total price is "+(ms[1][count-1].accumulatePrinciple+ms[1][count-1].accumulateInterest)+". Compares to fixed rate, you need to pay "+(-(ms[0].standardTotal-ms[1][count-1].accumulateInterest-ms[1][count-1].accumulatePrinciple))+" more";
+			document.getElementById("errormessage40").innerHTML =  "Borrowed $"+ms[1][count-1].accumulatePrinciple+" in "+count+" month, paid $"+parseInt(ms[1][count-1].accumulateInterest)+" as interest, and total price is $"+(parseInt(ms[1][count-1].accumulatePrinciple)+parseInt(ms[1][count-1].accumulateInterest))+". Compares to fixed rate, you need to pay $"+(-(parseInt(ms[0].standardTotal)-parseInt(ms[1][count-1].accumulateInterest)-parseInt(ms[1][count-1].accumulatePrinciple)))+" more";
 			$("#abc").show();
 			}
 
@@ -531,7 +531,7 @@ $(document).ready(function(){
 		totalTable.addRows(2);
 		totalTable.addRows([
 		              ['Principle: $'+ms[1][count-1].accumulatePrinciple, ms[1][count-1].accumulatePrinciple],
-		              ['Interest:  $'+ms[1][count-1].accumulateInterest, ms[1][count-1].accumulateInterest]
+		              ['Interest:  $'+parseInt(ms[1][count-1].accumulateInterest), parseInt(ms[1][count-1].accumulateInterest)]
 		            ]);
 		
 		

@@ -36,7 +36,7 @@ $(document).ready(function() {
 			
 	function validateUsername(){
 		// if length invalid
-		if( username.val().length < 2 || username.val().length > 10){
+		if( username.val().length < 2 || username.val().length > 8){
 //			$("#usernameErrorInfo").html("User name should contain more than 3 letters and up to 20 letters.");
 //			$("#usernameErrorInfo").show();
 //			username.removeClass("correct");

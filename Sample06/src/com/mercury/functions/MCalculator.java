@@ -2,13 +2,16 @@ package com.mercury.functions;
 
 import java.text.DecimalFormat;
 import java.util.Random;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.springframework.cache.annotation.Cacheable;
 
 public class MCalculator {
+	
+	public static double changeFormat(double d){
+		DecimalFormat df = new DecimalFormat("#.##");
+		return Double.parseDouble(df.format(d));
+	}
 	//in put arm yearly rate say 4.2, return monthly rate between 0.00308 and 0.00392
 	public static double getArmRate(double baseRate){ 
 		Random r = new Random();
@@ -28,26 +31,26 @@ public class MCalculator {
 			return result;
 			}
 	}
-	public static int getMonthlyPayment (double principal,double monthApr,int term){
+	public static double getMonthlyPayment (double principal,double monthApr,int term){
 		double dmonthly;
 		dmonthly =(monthApr*principal)/(1-Math.pow((1+monthApr),-term));
 		//System.out.println(dmonthly);
-		return (int) Math.round(dmonthly);
+		return changeFormat(dmonthly);
 	}
 	
 	//ARMCycle means arm years, negative value means prepaid month with extraMonthly dollars put in
 	public JSONArray calculator(int principle,double APR,int term,int ARMCycle,int extraMonthly) throws JSONException{
 		//initialize
-		int total=0;
-		int remaining= principle;
+		double total=0;
+		double remaining= principle;
 		double baseMonthRate=APR/1200;
-		int monthlyPayment=getMonthlyPayment(principle,baseMonthRate,term);
-		int standardTotal =monthlyPayment*term;
+		double monthlyPayment=getMonthlyPayment(principle,baseMonthRate,term);
+		double standardTotal =changeFormat(monthlyPayment*term);
 		System.out.println(monthlyPayment);
-		int mp1=0,mp2=0;  
+		double mp1=0,mp2=0;  
 		JSONArray json = new JSONArray();
-		int accumulateInterest =0;
-		int accumulatePrinciple =0;
+		double accumulateInterest =0;
+		double accumulatePrinciple =0;
 		
 		//for prepaid & extra money case
 		if(ARMCycle<0 && extraMonthly>0){
@@ -68,22 +71,26 @@ public class MCalculator {
 				System.out.println(baseMonthRate);
 			}
 			total+=monthlyPayment;
-			int interest =(int)Math.round(remaining*baseMonthRate);
-			int monthlyPrincipal = monthlyPayment- interest;
-			remaining= remaining-monthlyPrincipal;
+			total=changeFormat(total);
+			
+			double interest =changeFormat(remaining*baseMonthRate);
+			double monthlyPrincipal = changeFormat(monthlyPayment- interest);
+			remaining= changeFormat(remaining-monthlyPrincipal);
 			accumulateInterest +=interest;
+			accumulateInterest=changeFormat(accumulateInterest);
 			accumulatePrinciple +=monthlyPrincipal;
+			accumulatePrinciple =changeFormat(accumulatePrinciple);
 			
 			JSONObject obj = new JSONObject();
 			if(i==term || remaining<=0){
 				//System.out.println(i+"	"+(monthlyPayment+remaining)+"	"+(monthlyPayment+remaining-interest)+"	"+interest+"	"+0);
 				obj.put("month", i);
-				obj.put("payment", monthlyPayment+remaining);
-				obj.put("principle", monthlyPayment+remaining-interest);
+				obj.put("payment", changeFormat(monthlyPayment+remaining));
+				obj.put("principle", changeFormat(monthlyPayment+remaining-interest));
 				obj.put("interest", interest);
 				obj.put("remaining", 0);
-				obj.put("accumulateInterest", accumulateInterest-remaining);
-				obj.put("accumulatePrinciple", accumulatePrinciple+remaining);
+				obj.put("accumulateInterest", changeFormat(accumulateInterest-remaining));
+				obj.put("accumulatePrinciple", changeFormat(accumulatePrinciple+remaining));
 			}
 			else{
 				//System.out.println(i+"	"+monthlyPayment+"	"+monthlyPrincipal+"	"+interest+"	"+remaining);
